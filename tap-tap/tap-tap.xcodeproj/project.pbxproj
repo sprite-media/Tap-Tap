@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		237C30292423E4FB00DC3121 /* SettingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237C30282423E4FB00DC3121 /* SettingScreen.swift */; };
+		237C302B2423E50700DC3121 /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237C302A2423E50700DC3121 /* Slider.swift */; };
 		23C73E912421B77F00570CD3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C73E902421B77F00570CD3 /* AppDelegate.swift */; };
 		23C73E932421B77F00570CD3 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 23C73E922421B77F00570CD3 /* GameScene.sks */; };
 		23C73E952421B77F00570CD3 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 23C73E942421B77F00570CD3 /* Actions.sks */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		237C30282423E4FB00DC3121 /* SettingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreen.swift; sourceTree = "<group>"; };
+		237C302A2423E50700DC3121 /* Slider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slider.swift; sourceTree = "<group>"; };
 		23C73E8D2421B77F00570CD3 /* tap-tap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tap-tap.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		23C73E902421B77F00570CD3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23C73E922421B77F00570CD3 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -72,6 +76,8 @@
 				23C73E9F2421B78200570CD3 /* LaunchScreen.storyboard */,
 				23C73EA22421B78200570CD3 /* Info.plist */,
 				23C73EA82421BB7B00570CD3 /* SplashScene.swift */,
+				237C30282423E4FB00DC3121 /* SettingScreen.swift */,
+				237C302A2423E50700DC3121 /* Slider.swift */,
 			);
 			path = "tap-tap";
 			sourceTree = "<group>";
@@ -149,9 +155,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				237C30292423E4FB00DC3121 /* SettingScreen.swift in Sources */,
 				23C73E972421B77F00570CD3 /* GameScene.swift in Sources */,
 				23C73EA92421BB7B00570CD3 /* SplashScene.swift in Sources */,
 				23C73E992421B77F00570CD3 /* GameViewController.swift in Sources */,
+				237C302B2423E50700DC3121 /* Slider.swift in Sources */,
 				23C73E912421B77F00570CD3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
