@@ -21,7 +21,7 @@ class GameViewController: UIViewController
         
         if let view = self.view as! SKView?
         {
-            let scene = GameScene(size : self.view.frame.size)
+            let scene = SplashScene(size : self.view.frame.size)
             scene.scaleMode = .aspectFill
             
             view.presentScene(scene)
