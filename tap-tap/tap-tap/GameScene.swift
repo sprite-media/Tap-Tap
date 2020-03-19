@@ -11,10 +11,14 @@ import GameplayKit
 
 class GameScene: SKScene
 {
+    var setting : SettingScreen?
+    
     override init(size: CGSize)
     {
         super.init(size: size)
         //initialize nodes
+        setting = SettingScreen(_parent: self)
+        setting!.Show(visible: true)
     }
     
     required init?(coder aDecoder: NSCoder)
@@ -26,6 +30,8 @@ class GameScene: SKScene
     {
         for t in touches
         {
+            setting!.slider_bgm!.ValueChange(touchPoint: t.location(in: self))
+            setting!.slider_sfx!.ValueChange(touchPoint: t.location(in: self))
         }
     }
     
@@ -33,6 +39,8 @@ class GameScene: SKScene
     {
         for t in touches
         {
+            setting!.slider_bgm!.ValueChange(touchPoint: t.location(in: self))
+            setting!.slider_sfx!.ValueChange(touchPoint: t.location(in: self))
         }
     }
     
