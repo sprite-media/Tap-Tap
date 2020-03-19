@@ -35,7 +35,6 @@ class GameoverScene : SKScene
     func CreateLabel()
     {
         let gameoverLabel = SKLabelNode(fontNamed: "Menlo-Bold")
-        gameoverLabel = SKLabelNode(fontNamed:"Menlo-Bold")
         gameoverLabel.position = CGPoint( x: self.frame.midX, y: self.frame.size.height / 1.2)
         gameoverLabel.zPosition = 10
         gameoverLabel.text = "GAME OVER"
