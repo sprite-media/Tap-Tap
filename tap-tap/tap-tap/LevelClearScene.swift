@@ -79,7 +79,7 @@ class LevelClearScene : SKScene
     }
     @objc func OKButton(sender: UIButton!)
     {
-        if let view = self.view as! SKView? {
+        if let view = self.view {
             
             let gameScene = GameScene(size: (self.view?.frame.size)!)
                 gameScene.scaleMode = .aspectFill
