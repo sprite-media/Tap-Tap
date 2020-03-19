@@ -16,6 +16,8 @@
 		23C73E9E2421B78200570CD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23C73E9D2421B78200570CD3 /* Assets.xcassets */; };
 		23C73EA12421B78200570CD3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23C73E9F2421B78200570CD3 /* LaunchScreen.storyboard */; };
 		23C73EA92421BB7B00570CD3 /* SplashScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C73EA82421BB7B00570CD3 /* SplashScene.swift */; };
+		D2990E982423E6170038579D /* LevelClearScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2990E972423E6170038579D /* LevelClearScene.swift */; };
+		D2990E9A2423EAE40038579D /* GameoverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2990E992423EAE40038579D /* GameoverScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		23C73EA02421B78200570CD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		23C73EA22421B78200570CD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23C73EA82421BB7B00570CD3 /* SplashScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScene.swift; sourceTree = "<group>"; };
+		D2990E972423E6170038579D /* LevelClearScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelClearScene.swift; sourceTree = "<group>"; };
+		D2990E992423EAE40038579D /* GameoverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameoverScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,8 @@
 				23C73E9F2421B78200570CD3 /* LaunchScreen.storyboard */,
 				23C73EA22421B78200570CD3 /* Info.plist */,
 				23C73EA82421BB7B00570CD3 /* SplashScene.swift */,
+				D2990E972423E6170038579D /* LevelClearScene.swift */,
+				D2990E992423EAE40038579D /* GameoverScene.swift */,
 			);
 			path = "tap-tap";
 			sourceTree = "<group>";
@@ -151,8 +157,10 @@
 			files = (
 				23C73E972421B77F00570CD3 /* GameScene.swift in Sources */,
 				23C73EA92421BB7B00570CD3 /* SplashScene.swift in Sources */,
+				D2990E9A2423EAE40038579D /* GameoverScene.swift in Sources */,
 				23C73E992421B77F00570CD3 /* GameViewController.swift in Sources */,
 				23C73E912421B77F00570CD3 /* AppDelegate.swift in Sources */,
+				D2990E982423E6170038579D /* LevelClearScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
