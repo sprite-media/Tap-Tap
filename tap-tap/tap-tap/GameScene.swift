@@ -14,6 +14,8 @@ class GameScene: SKScene
     var settingButton : SKSpriteNode = SKSpriteNode()
     var setting : SettingScreen?
     
+    var BGM : SKAudioNode = SKAudioNode()
+    
     override init(size: CGSize)
     {
         super.init(size: size)
@@ -31,7 +33,11 @@ class GameScene: SKScene
         addChild(settingButton)
         
         setting = SettingScreen(_parent: self)
-        //setting!.Show(visible: true)
+        
+        BGM = SKAudioNode(fileNamed: "bensound-littleidea")
+        BGM.autoplayLooped = true
+        BGM.run(SKAction.changeVolume(to:1.0, duration:0.0))
+        BGM.run(SKAction.play())
     }
     
     required init?(coder aDecoder: NSCoder)
@@ -53,8 +59,8 @@ class GameScene: SKScene
                 setting!.Show(visible: false)
                 addChild(settingButton)
             }
-            setting!.slider_bgm!.ValueChange(touchPoint: t.location(in: self))
-            setting!.slider_sfx!.ValueChange(touchPoint: t.location(in: self))
+            setting!.slider_bgm!.ValueChange(touchPoint: t.location(in: self), function : ChangeBGMVolume)
+            setting!.slider_sfx!.ValueChange(touchPoint: t.location(in: self), function : ChangeSFXVolume)
         }
     }
     
@@ -62,8 +68,9 @@ class GameScene: SKScene
     {
         for t in touches
         {
-            setting!.slider_bgm!.ValueChange(touchPoint: t.location(in: self))
-            setting!.slider_sfx!.ValueChange(touchPoint: t.location(in: self))
+            setting!.slider_bgm!.ValueChange(touchPoint: t.location(in: self), function : ChangeBGMVolume)
+            setting!.slider_sfx!.ValueChange(touchPoint: t.location(in: self), function : ChangeSFXVolume)
+
         }
     }
     
@@ -71,8 +78,9 @@ class GameScene: SKScene
     {
         for t in touches
         {
-            setting!.slider_bgm!.ValueChange(touchPoint: t.location(in: self))
-            setting!.slider_sfx!.ValueChange(touchPoint: t.location(in: self))
+            setting!.slider_bgm!.ValueChange(touchPoint: t.location(in: self), function : ChangeBGMVolume)
+            setting!.slider_sfx!.ValueChange(touchPoint: t.location(in: self), function : ChangeSFXVolume)
+
         }
     }
     
@@ -80,13 +88,25 @@ class GameScene: SKScene
     {
         for t in touches
         {
-            setting!.slider_bgm!.ValueChange(touchPoint: t.location(in: self))
-            setting!.slider_sfx!.ValueChange(touchPoint: t.location(in: self))
+            setting!.slider_bgm!.ValueChange(touchPoint: t.location(in: self), function : ChangeBGMVolume)
+            setting!.slider_sfx!.ValueChange(touchPoint: t.location(in: self), function : ChangeSFXVolume)
+
         }
     }
     
     override func update(_ currentTime: TimeInterval)
     {
         // Called before each frame is rendered
+    }
+    
+    func ChangeBGMVolume(vol : Float)
+    {
+        print(vol)
+        BGM.run(SKAction.changeVolume(to:vol, duration:0.0))
+    }
+    func ChangeSFXVolume(vol : Float)
+    {
+        print(vol)
+        //change to sfx BGM.run(SKAction.changeVolume(to:vol, duration:0.0))
     }
 }

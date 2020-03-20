@@ -84,12 +84,13 @@ class Slider
         handle.removeFromParent()
         visible = false
     }
-    func ValueChange(touchPoint : CGPoint)
+    func ValueChange(touchPoint : CGPoint, function : (_ vol:Float)->Void)
     {
         if(visible && bg.contains(touchPoint))
         {
             value = ValueFromPoint(point: touchPoint)
             //receive function as parameter
+            function(Float(value))
         }
     }
     func ValueFromPoint(point : CGPoint) -> CGFloat
