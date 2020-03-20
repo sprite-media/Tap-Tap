@@ -11,6 +11,10 @@ import GameplayKit
 
 class GameScene: SKScene
 {
+    var timerBar : SKSpriteNode = SKSpriteNode()
+    var toWin : SKSpriteNode = SKSpriteNode()
+    var toLose : SKSpriteNode = SKSpriteNode()
+        
     var settingButton : SKSpriteNode = SKSpriteNode()
     var setting : SettingScreen?
     
@@ -20,18 +24,21 @@ class GameScene: SKScene
     {
         super.init(size: size)
         //initialize nodes
-        let bg = SKSpriteNode(texture: SKTexture(imageNamed: "bg_big_yellow"))
-        bg.scale(to: CGSize(width: WIDTH, height: HEIGHT))
-        bg.position = CGPoint(x : WIDTH * 0.5, y: HEIGHT * 0.5)
-        bg.zPosition = -1
-        addChild(bg)
+        //temp for m2 only
+        toWin = SKSpriteNode(texture: SKTexture(imageNamed: "CIRCLE"))
+        toWin.scale(to: CGSize(width: WIDTH*0.2, height: WIDTH*0.2))
+        toWin.position = CGPoint(x : WIDTH*0.3, y : HEIGHT*0.5)
+        toWin.zPosition = 5
+        addChild(toWin)
         
-        settingButton = SKSpriteNode(texture : SKTexture(imageNamed: "CasualUI_6_5"))
-        settingButton.scale(to: CGSize(width: WIDTH*0.1, height: WIDTH * 0.1))
-        settingButton.position = CGPoint(x: WIDTH * 0.1, y: HEIGHT - (WIDTH*0.2))
-        settingButton.zPosition = 10
-        addChild(settingButton)
+        toLose = SKSpriteNode(texture: SKTexture(imageNamed: "HEXAGON"))
+        toLose.scale(to: CGSize(width: WIDTH*0.2, height: WIDTH*0.2))
+        toLose.position = CGPoint(x : WIDTH*0.7, y : HEIGHT*0.5)
+        toLose.zPosition = 5
+        addChild(toLose)
         
+        
+        CreateUI()
         setting = SettingScreen(_parent: self)
         
         BGM = SKAudioNode(fileNamed: "bensound-littleidea")
@@ -58,6 +65,16 @@ class GameScene: SKScene
             {
                 setting!.Show(visible: false)
                 addChild(settingButton)
+            }
+            else if(toWin.contains(t.location(in: self)))
+            {
+                let clear = LevelClearScene(size: (self.view?.frame.size)!)
+                self.view?.presentScene(clear)
+            }
+            else if(toLose.contains(t.location(in: self)))
+            {
+                let over = GameoverScene(size: (self.view?.frame.size)!)
+                self.view?.presentScene(over)
             }
             setting!.slider_bgm!.ValueChange(touchPoint: t.location(in: self), function : ChangeBGMVolume)
             setting!.slider_sfx!.ValueChange(touchPoint: t.location(in: self), function : ChangeSFXVolume)
@@ -97,6 +114,48 @@ class GameScene: SKScene
     override func update(_ currentTime: TimeInterval)
     {
         // Called before each frame is rendered
+    }
+    
+    
+    func CreateUI()
+    {
+        let bg = SKSpriteNode(texture: SKTexture(imageNamed: "bg_big_yellow"))
+        bg.scale(to: CGSize(width: WIDTH, height: HEIGHT))
+        bg.position = CGPoint(x : WIDTH * 0.5, y: HEIGHT * 0.5)
+        bg.zPosition = -1
+        addChild(bg)
+        
+        let timerBG : SKSpriteNode = SKSpriteNode(texture: SKTexture(imageNamed: "CasualUI_15_2"))
+        timerBG.scale(to: CGSize(width: WIDTH, height: HEIGHT * 0.2))
+        timerBG.position = CGPoint(x : WIDTH * 0.5, y : HEIGHT - (timerBG.size.height * 0.5))
+        timerBG.zPosition = 1
+        addChild(timerBG)
+        
+        let timerFrame : SKSpriteNode = SKSpriteNode(texture: SKTexture(imageNamed: "CasualUI_5_4"))
+        timerFrame.scale(to: CGSize(width: WIDTH, height: HEIGHT * 0.1))
+        timerFrame.position = CGPoint(x : WIDTH * 0.5, y : timerBG.position.y - (timerBG.size.height*0.5) + (timerFrame.size.height*0.5))
+        timerFrame.zPosition = 3
+        addChild(timerFrame)
+        
+        timerBar = SKSpriteNode(texture: SKTexture(imageNamed: "CasualUI_5_2"))
+        timerBar.scale(to: CGSize(width: timerFrame.size.width * 0.96, height: timerFrame.size.height*0.9))
+        timerBar.position = timerFrame.position
+        timerBar.zPosition = 2
+        addChild(timerBar)
+        
+        let goalBG : SKSpriteNode = SKSpriteNode(texture: SKTexture(imageNamed: "CasualUI_15_2"))
+        goalBG.scale(to: CGSize(width: WIDTH, height: HEIGHT*0.2))
+        goalBG.position = CGPoint(x : WIDTH * 0.5, y: goalBG.size.height*0.5)
+        goalBG.zPosition = 1
+        addChild(goalBG)
+        
+        settingButton = SKSpriteNode(texture : SKTexture(imageNamed: "CasualUI_6_5"))
+        settingButton.scale(to: CGSize(width: WIDTH*0.1, height: WIDTH * 0.1))
+        settingButton.position = CGPoint(x: WIDTH * 0.1, y: HEIGHT - (WIDTH*0.1))
+        settingButton.zPosition = 10
+        settingButton.color = SKColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0)
+        settingButton.colorBlendFactor = 1.0
+        addChild(settingButton)
     }
     
     func ChangeBGMVolume(vol : Float)
