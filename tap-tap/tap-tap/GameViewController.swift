@@ -25,7 +25,7 @@ class GameViewController: UIViewController
             scene.scaleMode = .aspectFill
             
             view.presentScene(scene)
-            view.ignoresSiblingOrder = true
+            view.ignoresSiblingOrder = false
             view.showsPhysics = true;//change to false when releasing
             view.showsFPS = true
             view.showsNodeCount = true
