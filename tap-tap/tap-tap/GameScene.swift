@@ -8,6 +8,7 @@
 
 import SpriteKit
 import GameplayKit
+import os.log
 
 class GameScene: SKScene
 {
@@ -134,6 +135,10 @@ extension GameScene {
         
         let reduce = SKAction.scale(to: CGSize(width: 0.0, height: HEIGHT * 0.09), duration: self.time)
         timerBar.run(reduce)
+        
+        Timer.scheduledTimer(withTimeInterval: self.time, repeats: false) { (timer) in
+            os_log("time's up")
+        }
     }
 }
 
