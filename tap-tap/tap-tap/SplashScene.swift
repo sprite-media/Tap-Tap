@@ -59,6 +59,10 @@ class SplashScene : SKScene
     {
         if let view = self.view
         {
+            //let nextLevel = GameScene(fileNamed: "Level2")
+            //Data.currentLevel = 2
+            //nextLevel?.scaleMode = .aspectFill
+            
             let gameScene = GameScene(size: (self.view?.frame.size)!)
                        gameScene.scaleMode = .aspectFill
             // Present the scene
