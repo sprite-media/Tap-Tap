@@ -20,8 +20,12 @@ class GameScene: SKScene
     // Main Images
     var toWin : SKSpriteNode = SKSpriteNode()
     var toLose : SKSpriteNode = SKSpriteNode()
+
     
-    // Goal Images
+    // Goal
+    var goalNum : Int = 0
+    var goalArray = [Int]()
+    var goalImageContainer = [SKSpriteNode]()
         
     //Engine
     var previousTimeInterval : TimeInterval = 0
@@ -76,7 +80,7 @@ class GameScene: SKScene
     }
 }
 
-//MARK: Draw
+//MARK: Initialization
 extension GameScene {
     
     func CreateUI()
@@ -111,7 +115,7 @@ extension GameScene {
         timerBarBG.position = timerFrame.position
         timerBarBG.zPosition = 3
         addChild(timerBarBG)
-                	#imageLiteral(resourceName: "CasualUI_15_2.png")
+                	
         let goalBG : SKSpriteNode = SKSpriteNode(texture: SKTexture(imageNamed: "CasualUI_15_2"))
         goalBG.scale(to: CGSize(width: WIDTH, height: HEIGHT*0.2))
         goalBG.position = CGPoint(x : WIDTH * 0.5, y: goalBG.size.height*0.5)
@@ -126,6 +130,19 @@ extension GameScene {
         settingButton.colorBlendFactor = 1.0
         addChild(settingButton)
     }
+    
+    func CreateGoal() {
+        
+        var level = Data.currentLevel
+        if level > 25 {
+            level = 25
+        }
+        goalNum = 1 + (Int)(level/5)
+        
+        for n in 0 ... goalNum {
+            goalArray[n] = Int.random(in: 1 ... 5)
+        }
+    }
 }
 
 //MARK: Action
@@ -138,7 +155,18 @@ extension GameScene {
         
         Timer.scheduledTimer(withTimeInterval: self.time, repeats: false) { (timer) in
             os_log("time's up")
+            self.Lose()
         }
+    }
+    
+    func Win() {
+        let clear = LevelClearScene(size: (self.view?.frame.size)!)
+        self.view?.presentScene(clear)
+    }
+    
+    func Lose() {
+        let over = GameoverScene(size: (self.view?.frame.size)!)
+        self.view?.presentScene(over)
     }
 }
 
@@ -171,13 +199,11 @@ extension GameScene {
                }
                else if(toWin.contains(t.location(in: self)))
                {
-                   let clear = LevelClearScene(size: (self.view?.frame.size)!)
-                   self.view?.presentScene(clear)
+                   Win()
                }
                else if(toLose.contains(t.location(in: self)))
                {
-                   let over = GameoverScene(size: (self.view?.frame.size)!)
-                   self.view?.presentScene(over)
+                   Lose()
                }
                setting!.slider_bgm!.ValueChange(touchPoint: t.location(in: self), function : ChangeBGMVolume)
                setting!.slider_sfx!.ValueChange(touchPoint: t.location(in: self), function : ChangeSFXVolume)

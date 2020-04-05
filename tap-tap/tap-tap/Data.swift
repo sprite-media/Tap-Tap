@@ -18,3 +18,7 @@ enum APPLE : String {
         return 18
     }
 }
+
+struct Data {
+    static var currentLevel : UInt32 = 0
+}
