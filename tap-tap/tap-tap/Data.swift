@@ -10,15 +10,20 @@ import Foundation
 import SpriteKit
 
 enum APPLE : String {
-    case CIRCLE, CRESENT, DECAGON, HEART, HEPTAGON, HEXAGON,
+    case CIRCLE, CRESCENT, DECAGON, HEART, HEPTAGON, HEXAGON,
     NONAGON, OCTAGON, OVAL, PARALLELOGRAM, PENTAGON,
-    RECTANGLE, RHOMBUS, SEMICICLE, SQUARE, STAR, TRAPEZOID, TRIANGLE
+    RECTANGLE, RHOMBUS, SEMICIRCLE, SQUARE, STAR, TRAPEZOID, TRIANGLE
     
-    static var maxNum : UInt32 {
+    static var maxNum : Int {
         return 18
     }
 }
 
 struct Data {
-    static var currentLevel : UInt32 = 0
+    static var currentLevel : UInt32 = 30
+    static let apple = [
+        "CIRCLE", "CRESCENT", "DECAGON", "HEART", "HEPTAGON", "HEXAGON",
+        "NONAGON", "OCTAGON", "OVAL", "PARALLELOGRAM", "PENTAGON",
+        "RECTANGLE", "RHOMBUS", "SEMICIRCLE", "SQUARE", "STAR", "TRAPEZOID", "TRIANGLE"
+    ]
 }

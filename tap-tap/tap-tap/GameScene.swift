@@ -23,9 +23,11 @@ class GameScene: SKScene
 
     
     // Goal
+    var goalBG = SKSpriteNode()
     var goalNum : Int = 0
     var goalArray = [Int]()
     var goalImageContainer = [SKSpriteNode]()
+    var goalLabelCointainer = [SKLabelNode]()
         
     //Engine
     var previousTimeInterval : TimeInterval = 0
@@ -35,10 +37,8 @@ class GameScene: SKScene
     var setting : SettingScreen?
     
     var BGM : SKAudioNode = SKAudioNode()
-
-    override init(size: CGSize)
-    {
-        super.init(size: size)
+    
+    override func didMove(to view: SKView) {
         //initialize nodes
         //temp for m2 only
         toWin = SKSpriteNode(texture: SKTexture(imageNamed: "CIRCLE"))
@@ -55,12 +55,20 @@ class GameScene: SKScene
         
         CreateUI()
         GameTimer()
+        CreateGoal()
         setting = SettingScreen(_parent: self)
         
         BGM = SKAudioNode(fileNamed: "bensound-littleidea")
         BGM.autoplayLooped = true
         BGM.run(SKAction.changeVolume(to:1.0, duration:0.0))
         BGM.run(SKAction.play())
+    }
+
+    override init(size: CGSize)
+    {
+        super.init(size: size)
+        //initialize nodes
+        //temp for m2 only
     }
     
     required init?(coder aDecoder: NSCoder)
@@ -116,7 +124,7 @@ extension GameScene {
         timerBarBG.zPosition = 3
         addChild(timerBarBG)
                 	
-        let goalBG : SKSpriteNode = SKSpriteNode(texture: SKTexture(imageNamed: "CasualUI_15_2"))
+        goalBG = SKSpriteNode(texture: SKTexture(imageNamed: "CasualUI_15_2"))
         goalBG.scale(to: CGSize(width: WIDTH, height: HEIGHT*0.2))
         goalBG.position = CGPoint(x : WIDTH * 0.5, y: goalBG.size.height*0.5)
         goalBG.zPosition = 1
@@ -133,15 +141,36 @@ extension GameScene {
     
     func CreateGoal() {
         
+        //Set number of Images to Draw
         var level = Data.currentLevel
-        if level > 25 {
-            level = 25
+        if level > 20 {
+            level = 20
         }
-        goalNum = 1 + (Int)(level/5)
+        goalNum = 2 + (Int)(level/5) // number of goal iamges (min: 2 to 6 images)
         
-        for n in 0 ... goalNum {
-            goalArray[n] = Int.random(in: 1 ... 5)
+        //Copy string array of apple
+        var appleNameArray = [String]()
+        for name in Data.apple {
+            appleNameArray.append(name)
         }
+        var pickedAppleIndex = -1
+        
+        //Create Images
+        for n in 0 ..< goalNum {
+            goalArray.append(Int.random(in: 2 ... 5))//number that need to be pressed for each image (min 2 to 5 times)
+            
+            pickedAppleIndex = Int.random(in: 0 ..< APPLE.maxNum - n)
+            let goalImage = SKSpriteNode(texture: SKTexture(imageNamed: appleNameArray[pickedAppleIndex]))
+            appleNameArray.remove(at: pickedAppleIndex)
+            
+            goalBG.addChild(goalImage)
+            goalImage.scale(to: CGSize(width: goalBG.size.width / 11, height: goalBG.size.width / 11))
+            goalImage.position = CGPoint(x: goalBG.size.width/8 * CGFloat(n) - goalBG.size.width/3 , y: -goalBG.size.height/10)
+            goalImage.zPosition = 5
+            goalImageContainer.append(goalImage)
+
+        }
+
     }
 }
 
@@ -160,11 +189,13 @@ extension GameScene {
     }
     
     func Win() {
+        self.removeAllActions()
         let clear = LevelClearScene(size: (self.view?.frame.size)!)
         self.view?.presentScene(clear)
     }
     
     func Lose() {
+        self.removeAllActions()
         let over = GameoverScene(size: (self.view?.frame.size)!)
         self.view?.presentScene(over)
     }
