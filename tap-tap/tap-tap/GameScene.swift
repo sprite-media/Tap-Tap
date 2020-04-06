@@ -83,25 +83,25 @@ extension GameScene {
     {
         let bg = SKSpriteNode(texture: SKTexture(imageNamed: "bg_big_yellow"))
         bg.scale(to: CGSize(width: WIDTH, height: HEIGHT))
-        bg.position = CGPoint(x : WIDTH * 0.5, y: HEIGHT * 0.5)
+        bg.position = CGPoint(x : 0, y: 0)
         bg.zPosition = -1
         addChild(bg)
         
         let timerBG : SKSpriteNode = SKSpriteNode(texture: SKTexture(imageNamed: "CasualUI_15_2"))
         timerBG.scale(to: CGSize(width: WIDTH, height: HEIGHT * 0.2))
-        timerBG.position = CGPoint(x : WIDTH * 0.5, y : HEIGHT - (timerBG.size.height * 0.5))
+        timerBG.position = CGPoint(x : 0, y : (timerBG.size.height * 0.5))
         timerBG.zPosition = 2
         addChild(timerBG)
         
         let timerFrame : SKSpriteNode = SKSpriteNode(texture: SKTexture(imageNamed: "CasualUI_5_4"))
         timerFrame.scale(to: CGSize(width: WIDTH, height: HEIGHT * 0.1))
-        timerFrame.position = CGPoint(x : WIDTH * 0.5, y : timerBG.position.y - (timerBG.size.height*0.5) + (timerFrame.size.height*0.5))
+        timerFrame.position = CGPoint(x : 0, y : timerBG.position.y - (timerBG.size.height*0.5) + (timerFrame.size.height*0.5))
         timerFrame.zPosition = 5
         addChild(timerFrame)
         
         timerBar = SKSpriteNode(texture: SKTexture(imageNamed: "CasualUI_5_3"))
         timerBar.scale(to: CGSize(width: timerFrame.size.width * 0.96, height: timerFrame.size.height*0.9))
-        timerBar.position = CGPoint(x: WIDTH * 0.03, y: timerFrame.position.y)
+        timerBar.position = CGPoint(x: 0.03, y: timerFrame.position.y)
         timerBar.zPosition = 4
         timerBar.anchorPoint = CGPoint(x: 0.0, y: 0.5)
         addChild(timerBar)
@@ -114,13 +114,13 @@ extension GameScene {
                 	
         goalBG = SKSpriteNode(texture: SKTexture(imageNamed: "CasualUI_15_2"))
         goalBG.scale(to: CGSize(width: WIDTH, height: HEIGHT*0.2))
-        goalBG.position = CGPoint(x : WIDTH * 0.5, y: goalBG.size.height*0.5)
+        goalBG.position = CGPoint(x : 0.5, y: goalBG.size.height*0.5)
         goalBG.zPosition = 1
         addChild(goalBG)
         
         settingButton = SKSpriteNode(texture : SKTexture(imageNamed: "CasualUI_6_5"))
         settingButton.scale(to: CGSize(width: WIDTH*0.1, height: WIDTH * 0.1))
-        settingButton.position = CGPoint(x: WIDTH * 0.1, y: HEIGHT - (WIDTH*0.1))
+        settingButton.position = CGPoint(x: 0.1, y: HEIGHT - (WIDTH*0.1))
         settingButton.zPosition = 10
         settingButton.color = SKColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0)
         settingButton.colorBlendFactor = 1.0
