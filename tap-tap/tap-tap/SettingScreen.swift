@@ -22,6 +22,7 @@ class SettingScreen
     var back : SKSpriteNode = SKSpriteNode()
     var buttonLabel : SKLabelNode = SKLabelNode(fontNamed: "Menlo-Bold")
     
+
     init(_parent : SKScene)
     {
         parent = _parent

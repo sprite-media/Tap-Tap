@@ -13,11 +13,6 @@ class GameoverScene : SKScene
     var bg : SKSpriteNode!
     let okButton = UIButton(type: .system)
     
-    override init(size: CGSize)
-    {
-        super.init(size: size)
-   
-    }
     override func didMove(to view: SKView)
     {
         CreateBackground()
@@ -72,23 +67,10 @@ class GameoverScene : SKScene
     }
     @objc func OKButton(sender: UIButton!)
     {
-        if let view = self.view {
-            
-            let gameScene = GameScene(size: (self.view?.frame.size)!)
-                gameScene.scaleMode = .aspectFill
-            okButton.isHidden = true
-            // Present the scene
-            view.presentScene(gameScene)
-            view.ignoresSiblingOrder = true
-            view.showsPhysics = true
-            view.showsFPS = true
-            view.showsNodeCount = true
-            self.removeAllActions()
-            self.removeAllChildren()
-        }
+        let gameScene = SKScene(fileNamed: "GameScene")
+        okButton.isHidden = true
+        gameScene?.scaleMode = .aspectFill
+        view?.presentScene(gameScene)
     }
-    required init?(coder aDecoder: NSCoder)
-    {
-        fatalError("init has not been implemented.")
-    }
+
 }

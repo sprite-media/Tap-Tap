@@ -63,18 +63,6 @@ class GameScene: SKScene
         BGM.run(SKAction.changeVolume(to:1.0, duration:0.0))
         BGM.run(SKAction.play())
     }
-
-    override init(size: CGSize)
-    {
-        super.init(size: size)
-        //initialize nodes
-        //temp for m2 only
-    }
-    
-    required init?(coder aDecoder: NSCoder)
-    {
-        fatalError("init has not been implemented.")
-    }
     
     func ChangeBGMVolume(vol : Float)
     {
@@ -189,18 +177,15 @@ extension GameScene {
     }
     
     func Win() {
-        self.removeAllActions()
-        self.removeAllActions()
-        let clear = LevelClearScene(size: (self.view?.frame.size)!)
-        self.view?.presentScene(clear)
-    
+        let win = SKScene(fileNamed: "LevelClearScene")
+        win?.scaleMode = .aspectFill
+        view?.presentScene(win)
     }
     
     func Lose() {
-        self.removeAllActions()
-        self.removeAllActions()
-        let over = GameoverScene(size: (self.view?.frame.size)!)
-        self.view?.presentScene(over)
+        let win = SKScene(fileNamed: "GameoverScene")
+        win?.scaleMode = .aspectFill
+        view?.presentScene(win)
     }
 }
 

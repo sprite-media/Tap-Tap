@@ -19,6 +19,9 @@
 		23C73EA12421B78200570CD3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23C73E9F2421B78200570CD3 /* LaunchScreen.storyboard */; };
 		23C73EA92421BB7B00570CD3 /* SplashScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C73EA82421BB7B00570CD3 /* SplashScene.swift */; };
 		606F72D62437EF2000E69198 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606F72D52437EF2000E69198 /* Data.swift */; };
+		60EF121B243AAB0E008A570C /* SplashScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 60EF121A243AAB0E008A570C /* SplashScene.sks */; };
+		60EF121D243AAC13008A570C /* LevelClearScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 60EF121C243AAC13008A570C /* LevelClearScene.sks */; };
+		60EF121F243AAC95008A570C /* GameoverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 60EF121E243AAC95008A570C /* GameoverScene.sks */; };
 		D2990E982423E6170038579D /* LevelClearScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2990E972423E6170038579D /* LevelClearScene.swift */; };
 		D2990E9A2423EAE40038579D /* GameoverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2990E992423EAE40038579D /* GameoverScene.swift */; };
 /* End PBXBuildFile section */
@@ -38,6 +41,9 @@
 		23C73EA22421B78200570CD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23C73EA82421BB7B00570CD3 /* SplashScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScene.swift; sourceTree = "<group>"; };
 		606F72D52437EF2000E69198 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		60EF121A243AAB0E008A570C /* SplashScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SplashScene.sks; sourceTree = "<group>"; };
+		60EF121C243AAC13008A570C /* LevelClearScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LevelClearScene.sks; sourceTree = "<group>"; };
+		60EF121E243AAC95008A570C /* GameoverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameoverScene.sks; sourceTree = "<group>"; };
 		D2990E972423E6170038579D /* LevelClearScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelClearScene.swift; sourceTree = "<group>"; };
 		D2990E992423EAE40038579D /* GameoverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameoverScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,21 +78,24 @@
 		23C73E8F2421B77F00570CD3 /* tap-tap */ = {
 			isa = PBXGroup;
 			children = (
-				23C73E902421B77F00570CD3 /* AppDelegate.swift */,
 				23C73E922421B77F00570CD3 /* GameScene.sks */,
 				23C73E962421B77F00570CD3 /* GameScene.swift */,
-				23C73E982421B77F00570CD3 /* GameViewController.swift */,
-				23C73E9A2421B77F00570CD3 /* Main.storyboard */,
-				23C73E9D2421B78200570CD3 /* Assets.xcassets */,
 				606F72D52437EF2000E69198 /* Data.swift */,
-				23C73E942421B77F00570CD3 /* Actions.sks */,
-				23C73E9F2421B78200570CD3 /* LaunchScreen.storyboard */,
-				23C73EA22421B78200570CD3 /* Info.plist */,
 				23C73EA82421BB7B00570CD3 /* SplashScene.swift */,
+				60EF121A243AAB0E008A570C /* SplashScene.sks */,
 				237C30282423E4FB00DC3121 /* SettingScreen.swift */,
 				237C302A2423E50700DC3121 /* Slider.swift */,
 				D2990E972423E6170038579D /* LevelClearScene.swift */,
+				60EF121C243AAC13008A570C /* LevelClearScene.sks */,
 				D2990E992423EAE40038579D /* GameoverScene.swift */,
+				60EF121E243AAC95008A570C /* GameoverScene.sks */,
+				23C73E982421B77F00570CD3 /* GameViewController.swift */,
+				23C73E9F2421B78200570CD3 /* LaunchScreen.storyboard */,
+				23C73E9A2421B77F00570CD3 /* Main.storyboard */,
+				23C73E9D2421B78200570CD3 /* Assets.xcassets */,
+				23C73E902421B77F00570CD3 /* AppDelegate.swift */,
+				23C73E942421B77F00570CD3 /* Actions.sks */,
+				23C73EA22421B78200570CD3 /* Info.plist */,
 			);
 			path = "tap-tap";
 			sourceTree = "<group>";
@@ -150,7 +159,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				23C73E9C2421B77F00570CD3 /* Main.storyboard in Resources */,
+				60EF121D243AAC13008A570C /* LevelClearScene.sks in Resources */,
+				60EF121B243AAB0E008A570C /* SplashScene.sks in Resources */,
 				23C73E932421B77F00570CD3 /* GameScene.sks in Resources */,
+				60EF121F243AAC95008A570C /* GameoverScene.sks in Resources */,
 				23C73E9E2421B78200570CD3 /* Assets.xcassets in Resources */,
 				23C73EA12421B78200570CD3 /* LaunchScreen.storyboard in Resources */,
 				23C73E952421B77F00570CD3 /* Actions.sks in Resources */,
