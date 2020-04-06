@@ -83,6 +83,8 @@ class GameoverScene : SKScene
             view.showsPhysics = true
             view.showsFPS = true
             view.showsNodeCount = true
+            self.removeAllActions()
+            self.removeAllChildren()
         }
     }
     required init?(coder aDecoder: NSCoder)

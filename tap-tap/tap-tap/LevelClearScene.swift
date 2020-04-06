@@ -81,6 +81,7 @@ class LevelClearScene : SKScene
     {
         if let view = self.view {
             
+            
             let gameScene = GameScene(size: (self.view?.frame.size)!)
                 gameScene.scaleMode = .aspectFill
             okButton.isHidden = true
@@ -90,6 +91,8 @@ class LevelClearScene : SKScene
             view.showsPhysics = true
             view.showsFPS = true
             view.showsNodeCount = true
+            self.removeAllActions()
+            self.removeAllChildren()
         }
     }
     required init?(coder aDecoder: NSCoder)

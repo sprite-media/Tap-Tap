@@ -190,11 +190,14 @@ extension GameScene {
     
     func Win() {
         self.removeAllActions()
+        self.removeAllActions()
         let clear = LevelClearScene(size: (self.view?.frame.size)!)
         self.view?.presentScene(clear)
+    
     }
     
     func Lose() {
+        self.removeAllActions()
         self.removeAllActions()
         let over = GameoverScene(size: (self.view?.frame.size)!)
         self.view?.presentScene(over)
