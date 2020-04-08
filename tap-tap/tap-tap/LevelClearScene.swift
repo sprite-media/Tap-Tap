@@ -51,9 +51,9 @@ class LevelClearScene : SKScene
         okButton.titleLabel?.font = UIFont(name: "Menlo-Bold", size: 20)
         okButton.setTitleColor(UIColor.black, for: .normal)
         okButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
-               
+            
         okButton.addTarget(self, action: #selector(OKButton), for: .touchUpInside)
-        okButton.frame = CGRect(x: 85, y: 550, width: (okImage?.size.width)!, height: (okImage?.size.height)!)
+        okButton.frame = CGRect(x:  (okImage?.size.width)!/2, y: 550, width: (okImage?.size.width)!, height: (okImage?.size.height)!)
                   self.view?.addSubview(okButton)
         okButton.isHidden = false
 

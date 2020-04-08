@@ -22,8 +22,8 @@ class SettingScreen
     var back : SKSpriteNode = SKSpriteNode()
     var buttonLabel : SKLabelNode = SKLabelNode(fontNamed: "Menlo-Bold")
     
-    let width = 750.0
-    let height = 1334.0
+    let width : CGFloat = 750.0
+    let height : CGFloat = 1334.0
 
     init(_parent : SKScene)
     {
@@ -35,23 +35,23 @@ class SettingScreen
         
         audioIcon_bgm = SKSpriteNode(texture: SKTexture(imageNamed: "audio_icon"))
         audioIcon_bgm.size = CGSize(width: width * 0.2, height: width * 0.2)
-        audioIcon_bgm.position = CGPoint(x : CGFloat(-width / 5.8), y : CGFloat(height * 0.05))
+        audioIcon_bgm.position = CGPoint(x : CGFloat(width * -0.3) + audioIcon_bgm.size.width/2, y : CGFloat(height * 0.075))
         audioIcon_bgm.zPosition = 11
         
         audioIcon_sfx = SKSpriteNode(texture: SKTexture(imageNamed: "audio_icon"))
         audioIcon_sfx.size = CGSize(width: width * 0.2, height: width * 0.2)
-        audioIcon_sfx.position = CGPoint(x : CGFloat(-width / 5.8), y : CGFloat(-height * 0.05))
+        audioIcon_sfx.position = CGPoint(x : CGFloat(width * -0.3) + audioIcon_sfx.size.width/2, y : CGFloat(-height * 0.075))
         audioIcon_sfx.zPosition = 11
     
         slider_bgm = Slider(_parent : parent!)
         slider_bgm!.size = CGSize(width: WIDTH*0.7, height: WIDTH*0.18)
-        slider_bgm!.position = CGPoint(x : audioIcon_bgm.position.x + audioIcon_bgm.size.width * 1.25, y : audioIcon_bgm.position.y)
+        slider_bgm!.position = CGPoint(x : audioIcon_bgm.position.x + width * 0.275, y : audioIcon_bgm.position.y)
         slider_bgm!.value = 1
         slider_bgm!.zPosition = 11
         
         slider_sfx = Slider(_parent : parent!)
         slider_sfx!.size = CGSize(width: WIDTH*0.7, height: WIDTH*0.18)
-        slider_sfx!.position = CGPoint(x : audioIcon_sfx.position.x + audioIcon_sfx.size.width * 1.25 , y : audioIcon_sfx.position.y)
+        slider_sfx!.position = CGPoint(x : audioIcon_sfx.position.x + width * 0.275, y : audioIcon_sfx.position.y)
         slider_sfx!.value = 1
         slider_sfx!.zPosition = 11
         

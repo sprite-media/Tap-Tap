@@ -35,7 +35,9 @@ class GameScene: SKScene
         
     //Engine
     var previousTimeInterval : TimeInterval = 0
-    var isPause: Bool = false
+    var isPause: Bool = true
+    var isPanelExcist : Bool = true
+    var panel : SKNode?
     
     //Setting
     var settingButton : SKSpriteNode = SKSpriteNode()
@@ -50,6 +52,8 @@ class GameScene: SKScene
         goalBg = bg?.childNode(withName: "goalBg")
         timerBar = timerBg?.childNode(withName: "timerBar")
         timerBarBg = timerBg?.childNode(withName: "timerBarBg")
+        panel = childNode(withName: "panel")
+        panel?.zPosition = 50
     
         
         //temp for m2 only
@@ -65,9 +69,10 @@ class GameScene: SKScene
         toLose.zPosition = 5
         addChild(toLose)
         
+        Pause(b: isPause)
         CreateUI()
         GameTimer()
-        CreateGoal()
+        
         setting = SettingScreen(_parent: self)
         
         BGM = SKAudioNode(fileNamed: "bensound-littleidea")
@@ -127,8 +132,10 @@ extension GameScene {
             appleNameArray.remove(at: pickedAppleIndex)
             
             goalBg?.addChild(goalImage)
-            goalImage.size = CGSize(width: Data.screenSize.width / 4, height: Data.screenSize.width / 4)
-            goalImage.position = CGPoint(x: (Data.screenSize.width / 3) * CGFloat(n) + (Data.screenSize.width / 6), y: 0)
+            goalImage.size = CGSize(width: self.frame.width / 8, height: self.frame.width / 8)
+            var gap :CGFloat = self.frame.width * 0.15
+            let xPos : CGFloat = gap * CGFloat(n)
+            goalImage.position = CGPoint(x: xPos + self.frame.width * 0.1, y: -self.frame.height * 0.02)
             goalImage.zPosition = 5
             goalImageContainer.append(goalImage)
 
@@ -153,12 +160,14 @@ extension GameScene {
 
     
     func Win() {
+        Data.didWin = true
         let win = SKScene(fileNamed: "LevelClearScene")
         win?.scaleMode = .aspectFill
         view?.presentScene(win)
     }
     
     func Lose() {
+        Data.didWin = false
         let win = SKScene(fileNamed: "GameoverScene")
         win?.scaleMode = .aspectFill
         view?.presentScene(win)
@@ -187,6 +196,15 @@ extension GameScene {
        {
            for t in touches
            {
+                if(isPanelExcist)
+                {
+                    isPanelExcist = false
+                    isPause = false
+                    Pause(b: isPause)
+                    panel?.removeFromParent()
+                    CreateGoal()
+                }
+            
                 if(settingButton.contains(t.location(in: self)))
                 {
                     if !isPause {
