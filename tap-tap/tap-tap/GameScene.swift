@@ -94,8 +94,8 @@ extension GameScene {
     func CreateUI() {
         
         settingButton = SKSpriteNode(texture : SKTexture(imageNamed: "CasualUI_6_5"))
-        settingButton.scale(to: CGSize(width: WIDTH*0.1, height: WIDTH * 0.1))
-        settingButton.position = CGPoint(x: WIDTH * 0.1, y: HEIGHT - (WIDTH*0.1))
+        settingButton.size = CGSize(width: self.frame.width / 10, height: self.frame.width / 10)
+        settingButton.position = CGPoint(x: -self.frame.width/2 + self.frame.width / 15, y: self.frame.height / 2 - self.frame.width / 15)
         settingButton.zPosition = 10
         settingButton.color = SKColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0)
         settingButton.colorBlendFactor = 1.0
@@ -187,12 +187,13 @@ extension GameScene {
        {
            for t in touches
            {
-                if let _settingButton = settingButton {
+                if(settingButton.contains(t.location(in: self)))
+                {
                     if !isPause {
                         isPause = true
                         setting!.Show(visible: isPause)
                         Pause(b: isPause)
-                        _settingButton.alpha = 0
+                        settingButton.alpha = 0
                     }
                 }
                 else if(setting!.back.contains(t.location(in: self)))
@@ -201,7 +202,8 @@ extension GameScene {
                         isPause = false
                         setting!.Show(visible: isPause)
                         Pause(b: isPause)
-                        settingButton.alpha = 1
+                        let fadeIn = SKAction.fadeIn(withDuration: 1)
+                        settingButton.run(fadeIn)
                     }
                 }
                 else if(toWin.contains(t.location(in: self)))
