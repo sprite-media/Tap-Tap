@@ -38,7 +38,7 @@ class GameScene: SKScene
     var isPause: Bool = false
     
     //Setting
-    var settingButton : SKNode?
+    var settingButton : SKSpriteNode = SKSpriteNode()
     var setting : SettingScreen?
     
     var BGM : SKAudioNode = SKAudioNode()
@@ -50,7 +50,6 @@ class GameScene: SKScene
         goalBg = bg?.childNode(withName: "goalBg")
         timerBar = timerBg?.childNode(withName: "timerBar")
         timerBarBg = timerBg?.childNode(withName: "timerBarBg")
-        settingButton = timerBg?.childNode(withName: "settingButton")
     
         
         //temp for m2 only
@@ -66,6 +65,7 @@ class GameScene: SKScene
         toLose.zPosition = 5
         addChild(toLose)
         
+        CreateUI()
         GameTimer()
         CreateGoal()
         setting = SettingScreen(_parent: self)
@@ -90,6 +90,17 @@ class GameScene: SKScene
 
 //MARK: Initialization
 extension GameScene {
+    
+    func CreateUI() {
+        
+        settingButton = SKSpriteNode(texture : SKTexture(imageNamed: "CasualUI_6_5"))
+        settingButton.scale(to: CGSize(width: WIDTH*0.1, height: WIDTH * 0.1))
+        settingButton.position = CGPoint(x: WIDTH * 0.1, y: HEIGHT - (WIDTH*0.1))
+        settingButton.zPosition = 10
+        settingButton.color = SKColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0)
+        settingButton.colorBlendFactor = 1.0
+        addChild(settingButton)
+    }
     
     func CreateGoal() {
         
@@ -131,7 +142,7 @@ extension GameScene {
     
     func Pause(b : Bool){
         timerBar?.isPaused = b
-        settingButton!.isPaused = b
+        settingButton.isPaused = b
     }
     
     func GameTimer() {
@@ -190,7 +201,7 @@ extension GameScene {
                         isPause = false
                         setting!.Show(visible: isPause)
                         Pause(b: isPause)
-                        settingButton?.alpha = 1
+                        settingButton.alpha = 1
                     }
                 }
                 else if(toWin.contains(t.location(in: self)))
