@@ -18,7 +18,7 @@ class SplashScene : SKScene
             self.removeAllActions()
             self.removeAllChildren()
             let gameScene = SKScene(fileNamed: "GameScene")
-            gameScene?.scaleMode = .aspectFill
+            gameScene?.scaleMode = .aspectFit
             view.presentScene(gameScene)
         }
     }

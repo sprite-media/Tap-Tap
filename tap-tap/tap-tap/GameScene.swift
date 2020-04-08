@@ -35,6 +35,7 @@ class GameScene: SKScene
         
     //Engine
     var previousTimeInterval : TimeInterval = 0
+    var isPause: Bool = false
     
     //Setting
     var settingButton : SKNode?
@@ -50,6 +51,7 @@ class GameScene: SKScene
         timerBar = timerBg?.childNode(withName: "timerBar")
         timerBarBg = timerBg?.childNode(withName: "timerBarBg")
         settingButton = timerBg?.childNode(withName: "settingButton")
+    
         
         //temp for m2 only
         toWin = SKSpriteNode(texture: SKTexture(imageNamed: "CIRCLE"))
@@ -114,8 +116,8 @@ extension GameScene {
             appleNameArray.remove(at: pickedAppleIndex)
             
             goalBg?.addChild(goalImage)
-            goalImage.scale(to: CGSize(width: goalBg!.xScale / 11, height: goalBg!.xScale / 11))
-            goalImage.position = CGPoint(x: goalBg!.xScale / 8 * CGFloat(n) - goalBg!.xScale / 3 , y: -goalBg!.yScale / 10)
+            goalImage.size = CGSize(width: Data.screenSize.width / 4, height: Data.screenSize.width / 4)
+            goalImage.position = CGPoint(x: (Data.screenSize.width / 3) * CGFloat(n) + (Data.screenSize.width / 6), y: 0)
             goalImage.zPosition = 5
             goalImageContainer.append(goalImage)
 
@@ -127,16 +129,17 @@ extension GameScene {
 //MARK: Action
 extension GameScene {
     
+    func Pause(b : Bool){
+        timerBar?.isPaused = b
+        settingButton!.isPaused = b
+    }
+    
     func GameTimer() {
-        
         let reduce = SKAction.scale(to: CGSize(width: 0.0, height: HEIGHT * 0.09), duration: self.time)
         timerBar?.run(reduce)
-        
-        Timer.scheduledTimer(withTimeInterval: self.time, repeats: false) { (timer) in
-            os_log("time's up")
-            self.Lose()
-        }
+
     }
+
     
     func Win() {
         let win = SKScene(fileNamed: "LevelClearScene")
@@ -158,6 +161,11 @@ extension GameScene {
     {
         let deltaTime = currentTime - previousTimeInterval
         previousTimeInterval = currentTime
+        
+        if timerBar!.xScale <= CGFloat(0.0) {
+            Lose()
+        }
+
     }
 }
 
@@ -168,26 +176,33 @@ extension GameScene {
        {
            for t in touches
            {
-               if(settingButton!.contains(t.location(in: self)))
-               {
-                    setting!.Show(visible: true)
-                    settingButton!.removeFromParent()
-               }
-               else if(setting!.back.contains(t.location(in: self)))
-               {
-                    setting!.Show(visible: false)
-                    addChild(settingButton!)
-               }
-               else if(toWin.contains(t.location(in: self)))
-               {
+                if let _settingButton = settingButton {
+                    if !isPause {
+                        isPause = true
+                        setting!.Show(visible: isPause)
+                        Pause(b: isPause)
+                        _settingButton.alpha = 0
+                    }
+                }
+                else if(setting!.back.contains(t.location(in: self)))
+                {
+                    if isPause {
+                        isPause = false
+                        setting!.Show(visible: isPause)
+                        Pause(b: isPause)
+                        settingButton?.alpha = 1
+                    }
+                }
+                else if(toWin.contains(t.location(in: self)))
+                {
                     Win()
-               }
-               else if(toLose.contains(t.location(in: self)))
-               {
+                }
+                else if(toLose.contains(t.location(in: self)))
+                {
                     Lose()
-               }
-               setting!.slider_bgm!.ValueChange(touchPoint: t.location(in: self), function : ChangeBGMVolume)
-               setting!.slider_sfx!.ValueChange(touchPoint: t.location(in: self), function : ChangeSFXVolume)
+                }
+                setting!.slider_bgm!.ValueChange(touchPoint: t.location(in: self), function : ChangeBGMVolume)
+                setting!.slider_sfx!.ValueChange(touchPoint: t.location(in: self), function : ChangeSFXVolume)
            }
        }
        

@@ -17,32 +17,25 @@ class LevelClearScene : SKScene
 
     override func didMove(to view: SKView)
     {
-        CreateBackground()
         CreateLabel()
         CreateButtons()
         
     }
-    func CreateBackground()
-    {
-        bg = SKSpriteNode(texture: SKTexture(imageNamed: "bg_big_yellow.png"))
-        bg.size = self.frame.size
-        bg.position = CGPoint(x: -self.frame.size.width/2, y: -self.frame.size.height/2)
-        bg.zPosition = -20
-        addChild(bg)
-    }
+ 
     func CreateLabel()
     {
         let levelClearLabel = SKLabelNode(fontNamed: "Menlo-Bold")
         levelClearLabel.position = CGPoint( x: self.frame.midX, y: self.frame.size.height/1.2)
         levelClearLabel.zPosition = 10
+        levelClearLabel.fontSize = 36
         levelClearLabel.text = "LEVEL CLEAR"
         levelClearLabel.fontColor = UIColor.black
         self.addChild(levelClearLabel)
         
         let stageLabel = SKLabelNode(fontNamed: "Menlo-Bold")
-        stageLabel.position = CGPoint( x: self.frame.midX, y: self.frame.size.height/2)
+        stageLabel.position = CGPoint( x: 0, y: 450)
         stageLabel.zPosition = 10
-        stageLabel.text = "STAGE 1"
+        stageLabel.text = "STAGE \(Data.currentLevel) CLEARED"
         stageLabel.fontColor = UIColor.black
         self.addChild(stageLabel)
     }
@@ -60,8 +53,7 @@ class LevelClearScene : SKScene
         okButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
                
         okButton.addTarget(self, action: #selector(OKButton), for: .touchUpInside)
-        //okButton.frame = CGRect(x: self.frame.width/2 - (okImage?.size.width)!/2, y: self.frame.height/1.5, width: (okImage?.size.width)!, height: (okImage?.size.height)!)
-        okButton.frame = CGRect(x: self.size.width/2, y: self.size.height/2, width: (okImage?.size.width)!, height: (okImage?.size.height)!)
+        okButton.frame = CGRect(x: 85, y: 550, width: (okImage?.size.width)!, height: (okImage?.size.height)!)
                   self.view?.addSubview(okButton)
         okButton.isHidden = false
 
@@ -82,7 +74,7 @@ class LevelClearScene : SKScene
     {
         let gameScene = SKScene(fileNamed: "GameScene")
         okButton.isHidden = true
-        gameScene?.scaleMode = .aspectFill
+        gameScene?.scaleMode = .aspectFit
         view?.presentScene(gameScene)
     }
 

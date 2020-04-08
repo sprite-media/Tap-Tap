@@ -20,6 +20,7 @@ enum APPLE : String {
 }
 
 struct Data {
+    static let screenSize = UIScreen.main.bounds
     static var currentLevel : UInt32 = 30
     static let apple = [
         "CIRCLE", "CRESCENT", "DECAGON", "HEART", "HEPTAGON", "HEXAGON",
@@ -27,3 +28,5 @@ struct Data {
         "RECTANGLE", "RHOMBUS", "SEMICIRCLE", "SQUARE", "STAR", "TRAPEZOID", "TRIANGLE"
     ]
 }
+
+ 

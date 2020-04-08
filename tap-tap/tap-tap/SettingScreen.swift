@@ -22,39 +22,36 @@ class SettingScreen
     var back : SKSpriteNode = SKSpriteNode()
     var buttonLabel : SKLabelNode = SKLabelNode(fontNamed: "Menlo-Bold")
     
+    let width = 750.0
+    let height = 1334.0
 
     init(_parent : SKScene)
     {
         parent = _parent
         bg = SKSpriteNode(texture: SKTexture(imageNamed: "combinedBG"))
-        bg.scale(to: CGSize(width: WIDTH*0.8, height: HEIGHT*0.8))
-        bg.position = CGPoint(x : WIDTH*0.5, y : HEIGHT * 0.5)
+        bg.size = CGSize(width: width * 0.8, height: height * 0.8)
+        bg.position = CGPoint(x : 0, y : 0)
         bg.zPosition = 10
         
-        let x : CGFloat = bg.position.x - (bg.size.width*0.5) + WIDTH*0.1
-        let y : CGFloat = bg.position.y
-        
         audioIcon_bgm = SKSpriteNode(texture: SKTexture(imageNamed: "audio_icon"))
-        audioIcon_bgm.scale(to: CGSize(width: WIDTH*0.1, height: WIDTH*0.1))
-        audioIcon_bgm.position = CGPoint(x : x + audioIcon_bgm.size.width, y : y+audioIcon_bgm.size.height*2)
+        audioIcon_bgm.size = CGSize(width: width * 0.2, height: width * 0.2)
+        audioIcon_bgm.position = CGPoint(x : CGFloat(-width / 5.8), y : CGFloat(height * 0.05))
         audioIcon_bgm.zPosition = 11
         
         audioIcon_sfx = SKSpriteNode(texture: SKTexture(imageNamed: "audio_icon"))
-        audioIcon_sfx.scale(to: CGSize(width: WIDTH*0.1, height: WIDTH*0.1))
-        audioIcon_sfx.position = CGPoint(x : x + audioIcon_bgm.size.width, y : y-audioIcon_sfx.size.height*2)
+        audioIcon_sfx.size = CGSize(width: width * 0.2, height: width * 0.2)
+        audioIcon_sfx.position = CGPoint(x : CGFloat(-width / 5.8), y : CGFloat(-height * 0.05))
         audioIcon_sfx.zPosition = 11
-        
-        let sliderX : CGFloat = x + audioIcon_bgm.size.width + (WIDTH*0.05) + (WIDTH * 0.2)
-        
+    
         slider_bgm = Slider(_parent : parent!)
-        slider_bgm!.size = CGSize(width: WIDTH*0.4, height: WIDTH*0.12)
-        slider_bgm!.position = CGPoint(x : sliderX, y : audioIcon_bgm.position.y)
+        slider_bgm!.size = CGSize(width: WIDTH*0.7, height: WIDTH*0.18)
+        slider_bgm!.position = CGPoint(x : audioIcon_bgm.position.x + audioIcon_bgm.size.width * 1.25, y : audioIcon_bgm.position.y)
         slider_bgm!.value = 1
         slider_bgm!.zPosition = 11
         
         slider_sfx = Slider(_parent : parent!)
-        slider_sfx!.size = CGSize(width: WIDTH*0.4, height: WIDTH*0.12)
-        slider_sfx!.position = CGPoint(x : sliderX, y : audioIcon_sfx.position.y)
+        slider_sfx!.size = CGSize(width: WIDTH*0.7, height: WIDTH*0.18)
+        slider_sfx!.position = CGPoint(x : audioIcon_sfx.position.x + audioIcon_sfx.size.width * 1.25 , y : audioIcon_sfx.position.y)
         slider_sfx!.value = 1
         slider_sfx!.zPosition = 11
         
@@ -73,14 +70,14 @@ class SettingScreen
         label_sfx.zPosition = 11
         
         title.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
-        title.position = CGPoint(x : WIDTH * 0.5, y : (HEIGHT * 0.5) + (bg.size.height*0.41))
+        title.position = CGPoint(x : 0, y : height * 0.34)
         title.text = "Settings"
         title.fontColor = UIColor.black
-        title.zPosition = 11
+        title.zPosition = 12
         
         back = SKSpriteNode(texture: SKTexture(imageNamed: "OrangeButton"))
-        back.scale(to: CGSize(width: WIDTH * 0.3, height: HEIGHT * 0.1))
-        back.position = CGPoint(x : WIDTH * 0.5, y : bg.position.y - bg.size.height*0.3)
+        back.size = CGSize(width: width * 0.22, height: width * 0.18)
+        back.position = CGPoint(x : 0, y : -bg.size.height*0.3)
         back.zPosition = 11
         
         buttonLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
