@@ -53,8 +53,8 @@ class GameScene: SKScene
         timerBar = timerBg?.childNode(withName: "timerBar")
         timerBarBg = timerBg?.childNode(withName: "timerBarBg")
         panel = childNode(withName: "panel")
+        panel?.alpha = 0.7
         panel?.zPosition = 50
-    
         
         //temp for m2 only
         toWin = SKSpriteNode(texture: SKTexture(imageNamed: "CIRCLE"))
@@ -70,7 +70,6 @@ class GameScene: SKScene
         addChild(toLose)
         
         Pause(b: isPause)
-        CreateUI()
         GameTimer()
         
         setting = SettingScreen(_parent: self)
@@ -105,6 +104,16 @@ extension GameScene {
         settingButton.color = SKColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0)
         settingButton.colorBlendFactor = 1.0
         addChild(settingButton)
+        
+        let levelLabel = SKLabelNode()
+        levelLabel.position = CGPoint(x: 0, y: 580)
+        levelLabel.zPosition = 5
+        levelLabel.fontColor = #colorLiteral(red: 0.3098039329, green: 0.2039215714, blue: 0.03921568766, alpha: 1)
+        levelLabel.fontSize = 64
+        levelLabel.fontName = "MarkerFelt-Thin"
+        levelLabel.horizontalAlignmentMode = .center
+        levelLabel.text = String("Level \(Data.currentLevel)")
+        addChild(levelLabel)
     }
     
     func CreateGoal() {
@@ -125,22 +134,43 @@ extension GameScene {
         
         //Create Images
         for n in 0 ..< goalNum {
-            goalArray.append(Int.random(in: 2 ... 5))//number that need to be pressed for each image (min 2 to 5 times)
-            
             pickedAppleIndex = Int.random(in: 0 ..< APPLE.maxNum - n)
             let goalImage = SKSpriteNode(texture: SKTexture(imageNamed: appleNameArray[pickedAppleIndex]))
             appleNameArray.remove(at: pickedAppleIndex)
             
             goalBg?.addChild(goalImage)
             goalImage.size = CGSize(width: self.frame.width / 8, height: self.frame.width / 8)
-            var gap :CGFloat = self.frame.width * 0.15
-            let xPos : CGFloat = gap * CGFloat(n)
-            goalImage.position = CGPoint(x: xPos + self.frame.width * 0.1, y: -self.frame.height * 0.02)
+            let gap :CGFloat = self.frame.width * 0.15
+            let xPos : CGFloat = CGFloat(goalNum) / -2.0 * goalImage.size.width //gap * CGFloat(n)
+            goalImage.position = CGPoint(x: xPos + gap * CGFloat(n), y: -self.frame.height * 0.02)
             goalImage.zPosition = 5
+            goalImage.alpha = 0.7
             goalImageContainer.append(goalImage)
-
+            
+            var randNum : Int
+            if Data.currentLevel > 80 {
+                randNum = Int.random(in: 3 ... 6)
+            } else if Data.currentLevel > 40 {
+                randNum = Int.random(in: 2 ... 5)
+            } else if goalNum >= 4 {
+                randNum = Int.random(in: 1 ... 4)
+            } else {
+                randNum = Int.random(in: 2 ... 5)
+            }
+            
+            goalArray.append(randNum)//number that need to be pressed for each image
+            var goalLabel = SKLabelNode()
+            goalLabel.position = CGPoint(x: goalImage.position.x, y: self.frame.height * 0.04)
+            goalLabel.zPosition = 5
+            goalLabel.fontColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+            goalLabel.fontSize = 48
+            goalLabel.fontName = "MarkerFelt-Thin"
+            goalLabel.horizontalAlignmentMode = .center
+            goalLabel.text = String("\(goalArray[n])")
+            goalLabel.alpha = 0.7
+            goalBg?.addChild(goalLabel)
+            goalLabelCointainer.append(goalLabel)
         }
-
     }
 }
 
@@ -172,6 +202,28 @@ extension GameScene {
         win?.scaleMode = .aspectFill
         view?.presentScene(win)
     }
+    
+    func WinLoseCheck() {
+        
+        var won : Bool
+        if isPanelExcist {
+            won = false
+        } else {
+            won = true
+        }
+
+        for n in goalArray {
+            if n > 0 {
+                won = false
+                break;
+            }
+        }
+        if won {
+            Win()
+        } else if timerBar!.xScale <= CGFloat(0.0) {
+            Lose()
+        }
+    }
 }
 
 //MARK: Game Loop
@@ -182,10 +234,7 @@ extension GameScene {
         let deltaTime = currentTime - previousTimeInterval
         previousTimeInterval = currentTime
         
-        if timerBar!.xScale <= CGFloat(0.0) {
-            Lose()
-        }
-
+        WinLoseCheck()
     }
 }
 
@@ -198,11 +247,12 @@ extension GameScene {
            {
                 if(isPanelExcist)
                 {
-                    isPanelExcist = false
                     isPause = false
                     Pause(b: isPause)
-                    panel?.removeFromParent()
+                    CreateUI()
                     CreateGoal()
+                    isPanelExcist = false
+                    panel?.removeFromParent()
                 }
             
                 if(settingButton.contains(t.location(in: self)))
