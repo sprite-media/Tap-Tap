@@ -8,6 +8,7 @@
 
 import Foundation
 import SpriteKit
+import AVFoundation
 
 enum APPLE : String {
     case CIRCLE, CRESCENT, DECAGON, HEART, HEPTAGON, HEXAGON,
@@ -30,6 +31,31 @@ struct Data {
     
 }
 
+class SoundManager {
+    static let shared = SoundManager()
+    var audioPlayer: AVAudioPlayer?
+    
+    func StartBackgroundMusic() {
+        if let bundle = Bundle.main.path(forResource: "audio/bensound-littleidea", ofType: "mp3") {
+            let backgroundMusic = NSURL(fileURLWithPath: bundle)
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: backgroundMusic as URL)
+                guard let audioPlayer = audioPlayer else {return}
+                audioPlayer.numberOfLoops = -1
+                audioPlayer.prepareToPlay()
+                audioPlayer.play()
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    func StopBackgroundMusic() {
+        guard let audioPlayer = audioPlayer else { return }
+        audioPlayer.stop()
+    }
+    
+}
 
 
  

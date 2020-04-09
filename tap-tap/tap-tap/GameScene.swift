@@ -51,8 +51,7 @@ class GameScene: SKScene
     var settingButton : SKSpriteNode = SKSpriteNode()
     var setting : SettingScreen?
     
-    var BGM : SKAudioNode = SKAudioNode()
-    
+
     override func didMove(to view: SKView) {
         //initialize nodes
         bg = childNode(withName: "bg")
@@ -69,16 +68,16 @@ class GameScene: SKScene
         
         setting = SettingScreen(_parent: self)
         
-        BGM = SKAudioNode(fileNamed: "bensound-littleidea")
-        BGM.autoplayLooped = true
-        BGM.run(SKAction.changeVolume(to:1.0, duration:0.0))
-        BGM.run(SKAction.play())
+        //BGM = SKAudioNode(fileNamed: "bensound-littleidea")
+        //BGM.autoplayLooped = true
+        //BGM.run(SKAction.changeVolume(to:1.0, duration:0.0))
+        //BGM.run(SKAction.play())
     }
     
     func ChangeBGMVolume(vol : Float)
     {
         print(vol)
-        BGM.run(SKAction.changeVolume(to:vol, duration:0.0))
+        //BGM.run(SKAction.changeVolume(to:vol, duration:0.0))
     }
     func ChangeSFXVolume(vol : Float)
     {
