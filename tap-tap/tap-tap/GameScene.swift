@@ -20,7 +20,7 @@ class GameScene: SKScene
     //Timer
     var timerBar : SKNode?
     var timerBarBg : SKNode?
-    var time = 15.0
+    var time = 20.0
     
     // Main Images
     var toWin : SKSpriteNode = SKSpriteNode()
@@ -287,18 +287,19 @@ extension GameScene {
     {
         for t in touches
         {
-             if(isPanelExcist)
-             {
-                 isPause = false
-                 Pause(b: isPause)
-                 CreateUI()
-                 CreateGoal()
-                 CreateApples()
-                 isPanelExcist = false
-                 panel?.removeFromParent()
-             }
-         
             if !isTouching {
+             if(isPanelExcist)
+                 {
+                     isPause = false
+                     Pause(b: isPause)
+                     CreateUI()
+                     CreateGoal()
+                     CreateApples()
+                     isPanelExcist = false
+                     panel?.removeFromParent()
+                 }
+             
+           
                 for i in 0 ..< appleSpriteArray.count {
                     if appleSpriteArray[i].contains(t.location(in: self)) {
                         var touchCorrectApple = false
@@ -309,6 +310,8 @@ extension GameScene {
                                     goalLabelCointainer[j].text = "\(goalNumArray[j])"
                                 }
                                 else {
+                                    goalNum -= 1
+                                    goalTypeArray.remove(at: j)
                                     goalLabelCointainer[j].text = ""
                                 }
                                 CreateApples()
@@ -322,7 +325,6 @@ extension GameScene {
                         }
                     }
                 }
-            }
                     
              if(settingButton.contains(t.location(in: self)))
              {
@@ -343,14 +345,8 @@ extension GameScene {
                      settingButton.run(fadeIn)
                  }
              }
-             else if(toWin.contains(t.location(in: self)))
-             {
-                 Win()
-             }
-             else if(toLose.contains(t.location(in: self)))
-             {
-                 Lose()
-             }
+            }
+
              setting!.slider_bgm!.ValueChange(touchPoint: t.location(in: self), function : ChangeBGMVolume)
              setting!.slider_sfx!.ValueChange(touchPoint: t.location(in: self), function : ChangeSFXVolume)
         }
