@@ -12,7 +12,7 @@ class SplashScene : SKScene
 {
     override func didMove(to view: SKView)
     {
-        SoundManager.shared.StartBackgroundMusic()
+        SoundManager.shared.StartBackgroundMusic(soundName: "bensound-littleidea.mp3")
         self.backgroundColor = SKColor.white
         //CreateSwiftAndSpriteKitLogo()
         Timer.scheduledTimer(withTimeInterval: 5.5, repeats: false) {(timer) in

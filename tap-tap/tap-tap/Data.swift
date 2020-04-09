@@ -32,27 +32,17 @@ struct Data {
 }
 
 class SoundManager {
-    static let shared = SoundManager()
-    var audioPlayer: AVAudioPlayer?
+    static var shared = SoundManager()
+    var bgm : SKAudioNode = SKAudioNode()
     
-    func StartBackgroundMusic() {
-        if let bundle = Bundle.main.path(forResource: "audio/bensound-littleidea", ofType: "mp3") {
-            let backgroundMusic = NSURL(fileURLWithPath: bundle)
-            do {
-                audioPlayer = try AVAudioPlayer(contentsOf: backgroundMusic as URL)
-                guard let audioPlayer = audioPlayer else {return}
-                audioPlayer.numberOfLoops = -1
-                audioPlayer.prepareToPlay()
-                audioPlayer.play()
-            } catch {
-                print(error)
-            }
-        }
+    func StartBackgroundMusic(soundName : String) {
+        let sound : SKAction = SKAction.playSoundFileNamed(soundName, waitForCompletion: false)
+        let loopSound : SKAction = SKAction.repeatForever(sound)
+        bgm.run(loopSound)
     }
     
     func StopBackgroundMusic() {
-        guard let audioPlayer = audioPlayer else { return }
-        audioPlayer.stop()
+
     }
     
 }
