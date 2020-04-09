@@ -21,9 +21,9 @@ class GameoverScene : SKScene
 
     func CreateLabel()
     {
-        let gameoverLabel = SKLabelNode(fontNamed: "Menlo-Bold")
+        let gameoverLabel = SKLabelNode(fontNamed: "MarkerFelt-Thin")
         gameoverLabel.position = CGPoint( x: 0, y: 450)
-        gameoverLabel.fontSize = 36
+        gameoverLabel.fontSize = 48
         gameoverLabel.zPosition = 10
         gameoverLabel.text = "GAME OVER"
         gameoverLabel.fontColor = UIColor.black
@@ -38,7 +38,7 @@ class GameoverScene : SKScene
         okButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         okButton.setTitle("RETRY", for: .normal)
-        okButton.titleLabel?.font = UIFont(name: "Menlo-Bold", size: 20)
+        okButton.titleLabel?.font = UIFont(name: "MarkerFelt-Thin", size: 20)
         okButton.setTitleColor(UIColor.black, for: .normal)
         okButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
         

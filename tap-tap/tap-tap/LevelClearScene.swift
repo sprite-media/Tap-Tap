@@ -24,16 +24,10 @@ class LevelClearScene : SKScene
  
     func CreateLabel()
     {
-        let levelClearLabel = SKLabelNode(fontNamed: "Menlo-Bold")
-        levelClearLabel.position = CGPoint( x: self.frame.midX, y: self.frame.size.height/1.2)
-        levelClearLabel.zPosition = 10
-        levelClearLabel.fontSize = 36
-        levelClearLabel.text = "LEVEL CLEAR"
-        levelClearLabel.fontColor = UIColor.black
-        self.addChild(levelClearLabel)
-        
-        let stageLabel = SKLabelNode(fontNamed: "Menlo-Bold")
+
+        let stageLabel = SKLabelNode(fontNamed: "MarkerFelt-Thin")
         stageLabel.position = CGPoint( x: 0, y: 450)
+        stageLabel.fontSize = 48
         stageLabel.zPosition = 10
         stageLabel.text = "STAGE \(Data.currentLevel - 1) CLEARED"
         stageLabel.fontColor = UIColor.black
@@ -48,7 +42,7 @@ class LevelClearScene : SKScene
         okButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
                
         okButton.setTitle("NEXT", for: .normal)
-        okButton.titleLabel?.font = UIFont(name: "Menlo-Bold", size: 20)
+        okButton.titleLabel?.font = UIFont(name: "MarkerFelt-Thin", size: 20)
         okButton.setTitleColor(UIColor.black, for: .normal)
         okButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
             
