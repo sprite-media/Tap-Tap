@@ -25,7 +25,7 @@ struct Data {
     static let apple = [
         "CIRCLE", "CRESCENT", "DECAGON", "HEART", "HEPTAGON", "HEXAGON",
         "NONAGON", "OCTAGON", "PARALLELOGRAM", "PENTAGON",
-        "RECTANGLE", "RHOMBUS", "SEMICIRCLE", "SQUARE", "STAR", "TRAPEZOID", "TRIANGLE"
+        "RECTANGLE", "RHOMBUS", "SEMICIRCLE", "SQUARE", "STAR", "TRAPEZOID", "TRIANGLE", "EMPTY"
     ]
     
 }
