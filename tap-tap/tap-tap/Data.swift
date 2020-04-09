@@ -16,7 +16,7 @@ enum APPLE : String {
     RHOMBUS, SEMICIRCLE, SQUARE, STAR, TRAPEZOID, TRIANGLE
     
     static var maxNum : Int {
-        return 17
+        return 16
     }
 }
 
