@@ -44,6 +44,7 @@ class GameScene: SKScene
     var isPause: Bool = true
     var isPanelExcist : Bool = true
     var isTouching = false
+    var isGameStarted = false
     var panel : SKNode?
     
     //Setting
@@ -64,7 +65,7 @@ class GameScene: SKScene
         panel?.zPosition = 50
         
         Pause(b: isPause)
-        GameTimer()
+
         
         setting = SettingScreen(_parent: self)
         
@@ -182,6 +183,7 @@ extension GameScene {
             apple.removeFromParent()
         }
         appleSpriteArray.removeAll()
+        appleArray.removeAll()
         
         //Store apple in an array
         let tempUnPickedGoalArray = unPickedGoalArray
@@ -271,12 +273,10 @@ extension GameScene {
 //MARK: Game Loop
 extension GameScene {
     
-    override func update(_ currentTime: TimeInterval)
-    {
-        //let deltaTime = currentTime - previousTimeInterval
-        //previousTimeInterval = currentTime
-        
-        WinLoseCheck()
+    override func update(_ currentTime: TimeInterval) {
+        if isGameStarted {
+            WinLoseCheck()
+        }
     }
 }
 
@@ -288,16 +288,25 @@ extension GameScene {
         for t in touches
         {
             if !isTouching {
-             if(isPanelExcist)
-                 {
-                     isPause = false
-                     Pause(b: isPause)
-                     CreateUI()
-                     CreateGoal()
-                     CreateApples()
-                     isPanelExcist = false
-                     panel?.removeFromParent()
-                 }
+                isTouching = true
+                
+                if(isPanelExcist)
+                {
+                    isPause = false
+                    Timer.scheduledTimer(withTimeInterval: 1, repeats: false) {(timer) in
+                        self.Pause(b: self.isPause)
+                        self.CreateUI()
+                        self.CreateGoal()
+                        self.CreateApples()
+                        self.GameTimer()
+                        self.isGameStarted = true
+                        self.panel?.removeFromParent()
+                    }
+                    
+                    isPanelExcist = false
+                    let fadeOut = SKAction.fadeOut(withDuration: 1)
+                    panel?.run(fadeOut)
+                }
              
            
                 for i in 0 ..< appleSpriteArray.count {
@@ -311,11 +320,16 @@ extension GameScene {
                                 }
                                 else {
                                     goalNum -= 1
+                                    unPickedGoalArray.append(goalTypeArray[j])
                                     goalTypeArray.remove(at: j)
                                     goalLabelCointainer[j].text = ""
+                                    let xMark = SKSpriteNode(texture : SKTexture(imageNamed: "CasualUI_7_3"))
+                                    goalImageContainer[j].addChild(xMark)
+                                    xMark.zPosition = 6
+                                    xMark.position = CGPoint(x: 0, y: 0)
+                                    xMark.size = CGSize(width: goalImageContainer[j].size.width * 1.1, height: goalImageContainer[j].size.width)
                                 }
                                 CreateApples()
-                                isTouching = true
                                 touchCorrectApple = true
                                 break;
                             }
