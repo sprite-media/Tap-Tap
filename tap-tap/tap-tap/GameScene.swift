@@ -20,7 +20,7 @@ class GameScene: SKScene
     //Timer
     var timerBar : SKNode?
     var timerBarBg : SKNode?
-    var time = 10.0
+    var time = 15.0
     
     // Main Images
     var toWin : SKSpriteNode = SKSpriteNode()
@@ -29,14 +29,21 @@ class GameScene: SKScene
     
     // Goal
     var goalNum : Int = 0
-    var goalArray = [Int]()
+    var goalNumArray = [Int]()
+    var goalTypeArray = [APPLE]()
+    var unPickedGoalArray = [APPLE]()
     var goalImageContainer = [SKSpriteNode]()
     var goalLabelCointainer = [SKLabelNode]()
+    
+    // Apple
+    var appleArray = [APPLE]()
+    var appleSpriteArray = [SKSpriteNode]()
         
     //Engine
     var previousTimeInterval : TimeInterval = 0
     var isPause: Bool = true
     var isPanelExcist : Bool = true
+    var isTouching = false
     var panel : SKNode?
     
     //Setting
@@ -55,19 +62,6 @@ class GameScene: SKScene
         panel = childNode(withName: "panel")
         panel?.alpha = 0.7
         panel?.zPosition = 50
-        
-        //temp for m2 only
-        toWin = SKSpriteNode(texture: SKTexture(imageNamed: "CIRCLE"))
-        toWin.scale(to: CGSize(width: WIDTH*0.2, height: WIDTH*0.2))
-        toWin.position = CGPoint(x : WIDTH*0.3, y : HEIGHT*0.5)
-        toWin.zPosition = 5
-        addChild(toWin)
-        
-        toLose = SKSpriteNode(texture: SKTexture(imageNamed: "HEXAGON"))
-        toLose.scale(to: CGSize(width: WIDTH*0.2, height: WIDTH*0.2))
-        toLose.position = CGPoint(x : WIDTH*0.7, y : HEIGHT*0.5)
-        toLose.zPosition = 5
-        addChild(toLose)
         
         Pause(b: isPause)
         GameTimer()
@@ -136,6 +130,7 @@ extension GameScene {
         for n in 0 ..< goalNum {
             pickedAppleIndex = Int.random(in: 0 ..< APPLE.maxNum - n)
             let goalImage = SKSpriteNode(texture: SKTexture(imageNamed: appleNameArray[pickedAppleIndex]))
+            goalTypeArray.append(APPLE(rawValue: appleNameArray[pickedAppleIndex])!)
             appleNameArray.remove(at: pickedAppleIndex)
             
             goalBg?.addChild(goalImage)
@@ -155,27 +150,73 @@ extension GameScene {
             } else if goalNum >= 4 {
                 randNum = Int.random(in: 1 ... 4)
             } else {
-                randNum = Int.random(in: 2 ... 5)
+                randNum = Int.random(in: 2 ... 4)
             }
             
-            goalArray.append(randNum)//number that need to be pressed for each image
-            var goalLabel = SKLabelNode()
+            goalNumArray.append(randNum)//number that need to be pressed for each image
+            let goalLabel = SKLabelNode()
             goalLabel.position = CGPoint(x: goalImage.position.x, y: self.frame.height * 0.04)
             goalLabel.zPosition = 5
             goalLabel.fontColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
             goalLabel.fontSize = 48
             goalLabel.fontName = "MarkerFelt-Thin"
             goalLabel.horizontalAlignmentMode = .center
-            goalLabel.text = String("\(goalArray[n])")
+            goalLabel.text = String("\(goalNumArray[n])")
             goalLabel.alpha = 0.7
             goalBg?.addChild(goalLabel)
             goalLabelCointainer.append(goalLabel)
+        }
+        
+        for apple in appleNameArray {
+            unPickedGoalArray.append(APPLE(rawValue: apple)!)
         }
     }
 }
 
 //MARK: Action
 extension GameScene {
+
+    func CreateApples() {
+        
+        for apple in appleSpriteArray {
+            apple.removeFromParent()
+        }
+        appleSpriteArray.removeAll()
+        
+        //Store apple in an array
+        let tempUnPickedGoalArray = unPickedGoalArray
+        for n in 0 ... 5 {
+            if(n < goalTypeArray.count) {
+                appleArray.append(goalTypeArray[n])
+            } else {
+                let pickedAppleIndex = Int.random(in: 0 ..< tempUnPickedGoalArray.count)
+                let randomApple = APPLE(rawValue: tempUnPickedGoalArray[pickedAppleIndex].rawValue)
+                appleArray.append(randomApple!)
+            }
+        }
+        
+        //Mix
+        appleArray.shuffle()
+        
+        //Draw
+        for n in 0 ... 5 {
+            let image = SKSpriteNode(texture: SKTexture(imageNamed: appleArray[n].rawValue))
+            image.size = CGSize(width: self.frame.width / 6, height: self.frame.width / 6)
+            let verticalGap = (self.frame.height / 5)
+            if(n < 3) { //0,1,2
+                image.position.x = self.frame.width / -5
+            } else { //3,4,5
+                image.position.x = self.frame.width / 5
+            }
+            image.position.y = verticalGap - ((CGFloat(Int(n % 3)) * verticalGap))
+            
+            image.zPosition = 5
+            //image.position = CGPoint(x: 0, y: 0)
+            appleSpriteArray.append(image)
+            addChild(appleSpriteArray[n])
+        }
+
+    }
     
     func Pause(b : Bool){
         timerBar?.isPaused = b
@@ -190,6 +231,7 @@ extension GameScene {
 
     
     func Win() {
+        Data.currentLevel += 1
         Data.didWin = true
         let win = SKScene(fileNamed: "LevelClearScene")
         win?.scaleMode = .aspectFill
@@ -212,7 +254,7 @@ extension GameScene {
             won = true
         }
 
-        for n in goalArray {
+        for n in goalNumArray {
             if n > 0 {
                 won = false
                 break;
@@ -231,8 +273,8 @@ extension GameScene {
     
     override func update(_ currentTime: TimeInterval)
     {
-        let deltaTime = currentTime - previousTimeInterval
-        previousTimeInterval = currentTime
+        //let deltaTime = currentTime - previousTimeInterval
+        //previousTimeInterval = currentTime
         
         WinLoseCheck()
     }
@@ -242,50 +284,77 @@ extension GameScene {
 extension GameScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
-       {
-           for t in touches
-           {
-                if(isPanelExcist)
-                {
-                    isPause = false
-                    Pause(b: isPause)
-                    CreateUI()
-                    CreateGoal()
-                    isPanelExcist = false
-                    panel?.removeFromParent()
-                }
-            
-                if(settingButton.contains(t.location(in: self)))
-                {
-                    if !isPause {
-                        isPause = true
-                        setting!.Show(visible: isPause)
-                        Pause(b: isPause)
-                        settingButton.alpha = 0
+    {
+        for t in touches
+        {
+             if(isPanelExcist)
+             {
+                 isPause = false
+                 Pause(b: isPause)
+                 CreateUI()
+                 CreateGoal()
+                 CreateApples()
+                 isPanelExcist = false
+                 panel?.removeFromParent()
+             }
+         
+            if !isTouching {
+                for i in 0 ..< appleSpriteArray.count {
+                    if appleSpriteArray[i].contains(t.location(in: self)) {
+                        var touchCorrectApple = false
+                        for j in 0 ..< goalTypeArray.count {
+                            if appleArray[i] == goalTypeArray[j] {
+                                goalNumArray[j] -= 1
+                                if goalNumArray[j] > 0 {
+                                    goalLabelCointainer[j].text = "\(goalNumArray[j])"
+                                }
+                                else {
+                                    goalLabelCointainer[j].text = ""
+                                }
+                                CreateApples()
+                                isTouching = true
+                                touchCorrectApple = true
+                                break;
+                            }
+                        }
+                        if !touchCorrectApple {
+                            Lose()
+                        }
                     }
                 }
-                else if(setting!.back.contains(t.location(in: self)))
-                {
-                    if isPause {
-                        isPause = false
-                        setting!.Show(visible: isPause)
-                        Pause(b: isPause)
-                        let fadeIn = SKAction.fadeIn(withDuration: 1)
-                        settingButton.run(fadeIn)
-                    }
-                }
-                else if(toWin.contains(t.location(in: self)))
-                {
-                    Win()
-                }
-                else if(toLose.contains(t.location(in: self)))
-                {
-                    Lose()
-                }
-                setting!.slider_bgm!.ValueChange(touchPoint: t.location(in: self), function : ChangeBGMVolume)
-                setting!.slider_sfx!.ValueChange(touchPoint: t.location(in: self), function : ChangeSFXVolume)
-           }
-       }
+            }
+                    
+             if(settingButton.contains(t.location(in: self)))
+             {
+                 if !isPause {
+                     isPause = true
+                     setting!.Show(visible: isPause)
+                     Pause(b: isPause)
+                     settingButton.alpha = 0
+                 }
+             }
+             else if(setting!.back.contains(t.location(in: self)))
+             {
+                 if isPause {
+                     isPause = false
+                     setting!.Show(visible: isPause)
+                     Pause(b: isPause)
+                     let fadeIn = SKAction.fadeIn(withDuration: 1)
+                     settingButton.run(fadeIn)
+                 }
+             }
+             else if(toWin.contains(t.location(in: self)))
+             {
+                 Win()
+             }
+             else if(toLose.contains(t.location(in: self)))
+             {
+                 Lose()
+             }
+             setting!.slider_bgm!.ValueChange(touchPoint: t.location(in: self), function : ChangeBGMVolume)
+             setting!.slider_sfx!.ValueChange(touchPoint: t.location(in: self), function : ChangeSFXVolume)
+        }
+    }
        
        override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
        {
@@ -303,6 +372,10 @@ extension GameScene {
            {
                setting!.slider_bgm!.ValueChange(touchPoint: t.location(in: self), function : ChangeBGMVolume)
                setting!.slider_sfx!.ValueChange(touchPoint: t.location(in: self), function : ChangeSFXVolume)
+                
+            if isTouching {
+                isTouching = false
+            }
 
            }
        }

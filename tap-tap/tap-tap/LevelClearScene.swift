@@ -35,7 +35,7 @@ class LevelClearScene : SKScene
         let stageLabel = SKLabelNode(fontNamed: "Menlo-Bold")
         stageLabel.position = CGPoint( x: 0, y: 450)
         stageLabel.zPosition = 10
-        stageLabel.text = "STAGE \(Data.currentLevel) CLEARED"
+        stageLabel.text = "STAGE \(Data.currentLevel - 1) CLEARED"
         stageLabel.fontColor = UIColor.black
         self.addChild(stageLabel)
     }
