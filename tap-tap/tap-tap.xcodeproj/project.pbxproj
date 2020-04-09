@@ -24,6 +24,7 @@
 		60EF121F243AAC95008A570C /* GameoverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 60EF121E243AAC95008A570C /* GameoverScene.sks */; };
 		D2990E982423E6170038579D /* LevelClearScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2990E972423E6170038579D /* LevelClearScene.swift */; };
 		D2990E9A2423EAE40038579D /* GameoverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2990E992423EAE40038579D /* GameoverScene.swift */; };
+		D2FED7D8243FA2EE005F86EA /* bensound-littleidea.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D2FED7D7243FA2EE005F86EA /* bensound-littleidea.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		60EF121E243AAC95008A570C /* GameoverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameoverScene.sks; sourceTree = "<group>"; };
 		D2990E972423E6170038579D /* LevelClearScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelClearScene.swift; sourceTree = "<group>"; };
 		D2990E992423EAE40038579D /* GameoverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameoverScene.swift; sourceTree = "<group>"; };
+		D2FED7D7243FA2EE005F86EA /* bensound-littleidea.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "bensound-littleidea.mp3"; path = "Assets.xcassets/bensound-littleidea.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 		23C73E8F2421B77F00570CD3 /* tap-tap */ = {
 			isa = PBXGroup;
 			children = (
+				D2FED7D7243FA2EE005F86EA /* bensound-littleidea.mp3 */,
 				23C73E922421B77F00570CD3 /* GameScene.sks */,
 				23C73E962421B77F00570CD3 /* GameScene.swift */,
 				606F72D52437EF2000E69198 /* Data.swift */,
@@ -164,6 +167,7 @@
 				23C73E932421B77F00570CD3 /* GameScene.sks in Resources */,
 				60EF121F243AAC95008A570C /* GameoverScene.sks in Resources */,
 				23C73E9E2421B78200570CD3 /* Assets.xcassets in Resources */,
+				D2FED7D8243FA2EE005F86EA /* bensound-littleidea.mp3 in Resources */,
 				23C73EA12421B78200570CD3 /* LaunchScreen.storyboard in Resources */,
 				23C73E952421B77F00570CD3 /* Actions.sks in Resources */,
 			);
