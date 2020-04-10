@@ -65,24 +65,21 @@ class GameScene: SKScene
         
         Pause(b: isPause)
 
-        
         setting = SettingScreen(_parent: self)
         
-        //BGM = SKAudioNode(fileNamed: "bensound-littleidea")
-        //BGM.autoplayLooped = true
-        //BGM.run(SKAction.changeVolume(to:1.0, duration:0.0))
-        //BGM.run(SKAction.play())
+
     }
     
     func ChangeBGMVolume(vol : Float)
     {
-        print(vol)
-        //BGM.run(SKAction.changeVolume(to:vol, duration:0.0))
+        print(vol / 2)
+        SoundManager.shared.bgm.setVolume(vol / 2, fadeDuration: 0.0)
+
     }
     func ChangeSFXVolume(vol : Float)
     {
-        print(vol)
-        //change to sfx BGM.run(SKAction.changeVolume(to:vol, duration:0.0))
+        print(vol / 2)
+        SoundManager.shared.sfx.setVolume(vol / 2, fadeDuration: 0.0)
     }
 }
 
@@ -288,6 +285,7 @@ extension GameScene {
         {
             if !isTouching {
                 isTouching = true
+                SoundManager.shared.PlaySfx(soundName: "clickSoundMp3Version")
                 
                 if(isPanelExcist)
                 {

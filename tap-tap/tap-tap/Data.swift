@@ -33,19 +33,17 @@ struct Data {
 
 class SoundManager {
     static var shared = SoundManager()
-    //var bgm : SKAudioNode = SKAudioNode()
-    var audioPlayer = AVAudioPlayer()
+
+    var bgm = AVAudioPlayer()
+    var sfx = AVAudioPlayer()
+    
     func StartBackgroundMusic(soundName : String) {
-        /*
-        let sound : SKAction = SKAction.playSoundFileNamed(soundName, waitForCompletion: false)
-        let loopSound : SKAction = SKAction.repeatForever(sound)
-        bgm.run(loopSound)*/
         do
         {
-            audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: soundName, ofType: "mp3")!))
-            audioPlayer.prepareToPlay()
-            audioPlayer.numberOfLoops = 1
-            audioPlayer.play()
+            bgm = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: soundName, ofType: "mp3")!))
+            bgm.prepareToPlay()
+            bgm.numberOfLoops = -1
+            bgm.play()
         }
         catch
         {
@@ -53,8 +51,19 @@ class SoundManager {
         }
     }
     
-    func StopBackgroundMusic() {
-
+    func PlaySfx(soundName: String)
+    {
+        do
+        {
+            sfx = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: soundName, ofType: "mp3")!))
+            sfx.prepareToPlay()
+            sfx.numberOfLoops = 1
+            sfx.play()
+        }
+        catch
+        {
+            print(error)
+        }
     }
     
 }
