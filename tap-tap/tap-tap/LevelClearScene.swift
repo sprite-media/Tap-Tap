@@ -10,41 +10,27 @@ import SpriteKit
 
 class LevelClearScene : SKScene
 {
-    var bg : SKSpriteNode!
+    let time = 1.2
     let okButton = UIButton(type: .custom)
+    var button = SKSpriteNode()
     
-    override init(size: CGSize)
-    {
-        super.init(size: size)
-   
-    }
+
     override func didMove(to view: SKView)
     {
-        CreateBackground()
-        CreateLabel()
-        CreateButtons()
+        Timer.scheduledTimer(withTimeInterval: time, repeats: false) {(timer) in
+            self.CreateLabel()
+            self.CreateButtons()
+        }
     }
-    func CreateBackground()
-    {
-        bg = SKSpriteNode(texture: SKTexture(imageNamed: "bg_big_yellow.png"))
-        bg.size = self.frame.size
-        bg.position = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height/2)
-        bg.zPosition = -20
-        addChild(bg)
-    }
+ 
     func CreateLabel()
     {
-        let levelClearLabel = SKLabelNode(fontNamed: "Menlo-Bold")
-        levelClearLabel.position = CGPoint( x: self.frame.midX, y: self.frame.size.height/1.2)
-        levelClearLabel.zPosition = 10
-        levelClearLabel.text = "LEVEL CLEAR"
-        levelClearLabel.fontColor = UIColor.black
-        self.addChild(levelClearLabel)
-        
-        let stageLabel = SKLabelNode(fontNamed: "Menlo-Bold")
-        stageLabel.position = CGPoint( x: self.frame.midX, y: self.frame.size.height/2)
+
+        let stageLabel = SKLabelNode(fontNamed: "MarkerFelt-Thin")
+        stageLabel.position = CGPoint( x: 0, y: 450)
+        stageLabel.fontSize = 48
         stageLabel.zPosition = 10
-        stageLabel.text = "STAGE 1"
+        stageLabel.text = "STAGE \(Data.currentLevel - 1) CLEARED"
         stageLabel.fontColor = UIColor.black
         self.addChild(stageLabel)
     }
@@ -57,14 +43,15 @@ class LevelClearScene : SKScene
         okButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
                
         okButton.setTitle("NEXT", for: .normal)
-        okButton.titleLabel?.font = UIFont(name: "Menlo-Bold", size: 20)
+        okButton.titleLabel?.font = UIFont(name: "MarkerFelt-Thin", size: 20)
         okButton.setTitleColor(UIColor.black, for: .normal)
         okButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
-               
+            
         okButton.addTarget(self, action: #selector(OKButton), for: .touchUpInside)
-        okButton.frame = CGRect(x: self.frame.width/2 - (okImage?.size.width)!/2, y: self.frame.height/1.5, width: (okImage?.size.width)!, height: (okImage?.size.height)!)
+        okButton.frame = CGRect(x:  (okImage?.size.width)!/2, y: frame.height / 3.5, width: (okImage?.size.width)!, height: (okImage?.size.height)!)
                   self.view?.addSubview(okButton)
         okButton.isHidden = false
+        
     }
     func imageResize (image:UIImage, sizeChange:CGSize)-> UIImage
     {
@@ -79,21 +66,10 @@ class LevelClearScene : SKScene
     }
     @objc func OKButton(sender: UIButton!)
     {
-        if let view = self.view {
-            
-            let gameScene = GameScene(size: (self.view?.frame.size)!)
-                gameScene.scaleMode = .aspectFill
-            okButton.isHidden = true
-            // Present the scene
-            view.presentScene(gameScene)
-            view.ignoresSiblingOrder = true
-            view.showsPhysics = true
-            view.showsFPS = true
-            view.showsNodeCount = true
-        }
+        let gameScene = SKScene(fileNamed: "GameScene")
+        okButton.isHidden = true
+        gameScene?.scaleMode = .aspectFit
+        view?.presentScene(gameScene)
     }
-    required init?(coder aDecoder: NSCoder)
-    {
-        fatalError("init has not been implemented.")
-    }
+
 }

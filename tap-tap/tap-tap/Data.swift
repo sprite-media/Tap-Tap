@@ -8,13 +8,66 @@
 
 import Foundation
 import SpriteKit
+import AVFoundation
 
 enum APPLE : String {
-    case CIRCLE, CRESENT, DECAGON, HEART, HEPTAGON, HEXAGON,
-    NONAGON, OCTAGON, OVAL, PARALLELOGRAM, PENTAGON,
-    RECTANGLE, RHOMBUS, SEMICICLE, SQUARE, STAR, TRAPEZOID, TRIANGLE
+    case CIRCLE, CRESCENT, DECAGON, HEART, HEPTAGON, HEXAGON,
+    NONAGON, OCTAGON, PARALLELOGRAM, PENTAGON,
+    RHOMBUS, SEMICIRCLE, SQUARE, STAR, TRAPEZOID, TRIANGLE
     
-    static var maxNum : UInt32 {
-        return 18
+    static var maxNum : Int {
+        return 16
     }
 }
+
+struct Data {
+    static var currentLevel : UInt32 = 1
+    static var time = 20.0
+    static var didWin : Bool = false
+    static let apple = [
+        "CIRCLE", "CRESCENT", "DECAGON", "HEART", "HEPTAGON", "HEXAGON",
+        "NONAGON", "OCTAGON", "PARALLELOGRAM", "PENTAGON",
+        "RHOMBUS", "SEMICIRCLE", "SQUARE", "STAR", "TRAPEZOID", "TRIANGLE"
+    ]
+    
+}
+
+class SoundManager {
+    static var shared = SoundManager()
+
+    var bgm = AVAudioPlayer()
+    var sfx = AVAudioPlayer()
+    
+    func StartBackgroundMusic(soundName : String) {
+        do
+        {
+            bgm = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: soundName, ofType: "mp3")!))
+            bgm.prepareToPlay()
+            bgm.numberOfLoops = -1
+            bgm.play()
+        }
+        catch
+        {
+            print(error)
+        }
+    }
+    
+    func PlaySfx(soundName: String)
+    {
+        do
+        {
+            sfx = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: soundName, ofType: "mp3")!))
+            sfx.prepareToPlay()
+            sfx.numberOfLoops = 1
+            sfx.play()
+        }
+        catch
+        {
+            print(error)
+        }
+    }
+    
+}
+
+
+ 
