@@ -123,6 +123,9 @@ extension GameScene {
         }
         var pickedAppleIndex = -1
         
+        goalTypeArray.removeAll()
+        goalNumArray.removeAll()
+        
         //Create Images
         for n in 0 ..< goalNum {
             pickedAppleIndex = Int.random(in: 0 ..< APPLE.maxNum - n)
@@ -182,7 +185,12 @@ extension GameScene {
         appleArray.removeAll()
         
         //Store apple in an array
-        let tempUnPickedGoalArray = unPickedGoalArray
+        var tempUnPickedGoalArray = [APPLE]()
+        for unpickedApple in unPickedGoalArray {
+            tempUnPickedGoalArray.append(unpickedApple)
+        }
+        
+        
         for n in 0 ... 5 {
             if(n < goalTypeArray.count) {
                 appleArray.append(goalTypeArray[n])
@@ -222,7 +230,7 @@ extension GameScene {
     }
     
     func GameTimer() {
-        let reduce = SKAction.scale(to: CGSize(width: 0.0, height: HEIGHT * 0.09), duration: self.time)
+        let reduce = SKAction.scale(to: CGSize(width: 0.0, height: HEIGHT * 0.09), duration: Data.time)
         timerBar?.run(reduce)
 
     }
@@ -231,6 +239,7 @@ extension GameScene {
     func Win() {
         Data.currentLevel += 1
         Data.didWin = true
+        Data.time = time
         let win = SKScene(fileNamed: "LevelClearScene")
         win?.scaleMode = .aspectFill
         view?.presentScene(win)
@@ -238,6 +247,7 @@ extension GameScene {
     
     func Lose() {
         Data.didWin = false
+        Data.time += 1.0
         let win = SKScene(fileNamed: "GameoverScene")
         win?.scaleMode = .aspectFill
         view?.presentScene(win)
@@ -308,9 +318,11 @@ extension GameScene {
            
                 for i in 0 ..< appleSpriteArray.count {
                     if appleSpriteArray[i].contains(t.location(in: self)) {
+                        
                         var touchCorrectApple = false
+                        
                         for j in 0 ..< goalTypeArray.count {
-                            if appleArray[i] == goalTypeArray[j] {
+                            if appleArray[i] == goalTypeArray[j] && goalNumArray[j] > 0 {
                                 goalNumArray[j] -= 1
                                 if goalNumArray[j] > 0 {
                                     goalLabelCointainer[j].text = "\(goalNumArray[j])"
@@ -318,7 +330,8 @@ extension GameScene {
                                 else {
                                     goalNum -= 1
                                     unPickedGoalArray.append(goalTypeArray[j])
-                                    goalTypeArray.remove(at: j)
+                                    //goalTypeArray.remove(at: j)
+
                                     goalLabelCointainer[j].text = ""
                                     let xMark = SKSpriteNode(texture : SKTexture(imageNamed: "CasualUI_7_3"))
                                     goalImageContainer[j].addChild(xMark)

@@ -10,13 +10,17 @@ import SpriteKit
 
 class GameoverScene : SKScene
 {
-    var bg : SKSpriteNode!
-    let okButton = UIButton(type: .system)
+    let time = 1.2
+    let okButton = UIButton(type: .custom)
+    var button = SKSpriteNode()
     
+
     override func didMove(to view: SKView)
     {
-        CreateLabel()
-        CreateButtons()
+        Timer.scheduledTimer(withTimeInterval: time, repeats: false) {(timer) in
+            self.CreateLabel()
+            self.CreateButtons()
+        }
     }
 
     func CreateLabel()

@@ -22,6 +22,7 @@ enum APPLE : String {
 
 struct Data {
     static var currentLevel : UInt32 = 1
+    static var time = 20.0
     static var didWin : Bool = false
     static let apple = [
         "CIRCLE", "CRESCENT", "DECAGON", "HEART", "HEPTAGON", "HEXAGON",

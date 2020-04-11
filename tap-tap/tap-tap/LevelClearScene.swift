@@ -10,16 +10,17 @@ import SpriteKit
 
 class LevelClearScene : SKScene
 {
-    var bg : SKSpriteNode!
+    let time = 1.2
     let okButton = UIButton(type: .custom)
     var button = SKSpriteNode()
     
 
     override func didMove(to view: SKView)
     {
-        CreateLabel()
-        CreateButtons()
-        
+        Timer.scheduledTimer(withTimeInterval: time, repeats: false) {(timer) in
+            self.CreateLabel()
+            self.CreateButtons()
+        }
     }
  
     func CreateLabel()
@@ -50,7 +51,6 @@ class LevelClearScene : SKScene
         okButton.frame = CGRect(x:  (okImage?.size.width)!/2, y: 550, width: (okImage?.size.width)!, height: (okImage?.size.height)!)
                   self.view?.addSubview(okButton)
         okButton.isHidden = false
-
         
     }
     func imageResize (image:UIImage, sizeChange:CGSize)-> UIImage
