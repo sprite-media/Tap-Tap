@@ -13,6 +13,7 @@ class GameoverScene : SKScene
     let time = 1.2
     let okButton = UIButton(type: .custom)
     var button = SKSpriteNode()
+
     
 
     override func didMove(to view: SKView)
