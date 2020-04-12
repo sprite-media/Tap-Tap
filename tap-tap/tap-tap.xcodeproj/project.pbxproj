@@ -18,6 +18,7 @@
 		23C73E9E2421B78200570CD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23C73E9D2421B78200570CD3 /* Assets.xcassets */; };
 		23C73EA12421B78200570CD3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23C73E9F2421B78200570CD3 /* LaunchScreen.storyboard */; };
 		23C73EA92421BB7B00570CD3 /* SplashScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C73EA82421BB7B00570CD3 /* SplashScene.swift */; };
+		6030CBFB2443960400262FB4 /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6030CBFA2443960400262FB4 /* MyParticle.sks */; };
 		606F72D62437EF2000E69198 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606F72D52437EF2000E69198 /* Data.swift */; };
 		60CD8AF424412BE00069278B /* clickSoundMp3Version.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 60CD8AF324412BE00069278B /* clickSoundMp3Version.mp3 */; };
 		60EF121B243AAB0E008A570C /* SplashScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 60EF121A243AAB0E008A570C /* SplashScene.sks */; };
@@ -42,6 +43,7 @@
 		23C73EA02421B78200570CD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		23C73EA22421B78200570CD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23C73EA82421BB7B00570CD3 /* SplashScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScene.swift; sourceTree = "<group>"; };
+		6030CBFA2443960400262FB4 /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
 		606F72D52437EF2000E69198 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		60CD8AF324412BE00069278B /* clickSoundMp3Version.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clickSoundMp3Version.mp3; sourceTree = "<group>"; };
 		60EF121A243AAB0E008A570C /* SplashScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SplashScene.sks; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				60CD8AF324412BE00069278B /* clickSoundMp3Version.mp3 */,
 				23C73E922421B77F00570CD3 /* GameScene.sks */,
 				23C73E962421B77F00570CD3 /* GameScene.swift */,
+				6030CBFA2443960400262FB4 /* MyParticle.sks */,
 				606F72D52437EF2000E69198 /* Data.swift */,
 				23C73EA82421BB7B00570CD3 /* SplashScene.swift */,
 				60EF121A243AAB0E008A570C /* SplashScene.sks */,
@@ -170,6 +173,7 @@
 				23C73E932421B77F00570CD3 /* GameScene.sks in Resources */,
 				60EF121F243AAC95008A570C /* GameoverScene.sks in Resources */,
 				23C73E9E2421B78200570CD3 /* Assets.xcassets in Resources */,
+				6030CBFB2443960400262FB4 /* MyParticle.sks in Resources */,
 				D2FED7D8243FA2EE005F86EA /* bensound-littleidea.mp3 in Resources */,
 				60CD8AF424412BE00069278B /* clickSoundMp3Version.mp3 in Resources */,
 				23C73EA12421B78200570CD3 /* LaunchScreen.storyboard in Resources */,

@@ -13,13 +13,22 @@ class LevelClearScene : SKScene
     let time = 1.2
     let okButton = UIButton(type: .custom)
     var button = SKSpriteNode()
-    
+    var bg : SKNode?
+    var myParticle : SKEmitterNode?
 
     override func didMove(to view: SKView)
     {
+        bg = SKNode(fileNamed: "bg")
+        myParticle = SKEmitterNode(fileNamed: "MyParticle.sks")
+        myParticle?.position = CGPoint(x: 0, y: 0)
+        myParticle?.zPosition = 1
+        addChild(myParticle!)
+        
         Timer.scheduledTimer(withTimeInterval: time, repeats: false) {(timer) in
             self.CreateLabel()
             self.CreateButtons()
+            let fadeOut = SKAction.fadeOut(withDuration: 1)
+            self.myParticle?.run(fadeOut)
         }
     }
  
